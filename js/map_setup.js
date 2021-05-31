@@ -476,7 +476,7 @@ function render_info_box(url) {
 				closer.blur();
 
 				parse_json(json_address);
-				document.getElementById('closer').innerHTML = "<br><a id='closer_button' href='javascript:;'><i class='fa fa-times' aria-hidden='true'></i> Close</a>";
+				document.getElementById('closer').innerHTML = "<br><a id='closer_button' class='no_underline_link' href='javascript:;'><i class='fa fa-times' aria-hidden='true'>&nbsp;</i>Close</a>";
 
 				// Listener for closer details
 				$('#closer_button').click(function () {
