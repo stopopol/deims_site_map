@@ -104,27 +104,7 @@
 			height: calc(100% - 20px);
 			overflow: hidden;
 		}
-		#layers_menu_button {
-			padding-top: 1em;
-			padding-bottom: 1em;
-			margin-right: 10px
-		}
-		#export_menu_button {
-			padding-top: 1em;
-			padding-bottom: 1em;
-			margin-right: 10px
-		}
-		#additional_menu_button {
-			padding-top: 1em;
-			padding-bottom: 1em;
-			margin-right: 10px
-		}
-		#about_button {
-			padding-top: 1em;
-			padding-bottom: 1em;
-			margin-right: 10px
-		}
-		
+
 		.dropdown-menu>li>a:focus, .dropdown-menu>li>a:hover {
 			background-color: #337ab7 !important;
 			color: white !important;
@@ -186,3 +166,10 @@
 	text-align: center;
 }
 
+.no_underline_link {
+    text-decoration: none;
+}
+
+.no_underline_link:hover {
+    text-decoration: underline;
+}
