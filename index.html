@@ -47,7 +47,7 @@
 	<link rel="stylesheet" href="css/awesomplete.css" />
 
 	<!-- for the layout; optional -->
-	<script type="text/javascript" src="bootstrap/js/bootstrap.js"></script>
+	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
 	<link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
 	<link href="https://fonts.googleapis.com/css?family=Open Sans" rel="stylesheet">
@@ -88,7 +88,7 @@
 				</ul>	
 			  </li>
 			  <li class="nav-item">
-				<a class="nav-link" href="#" tabindex="-1" aria-disabled="true">About</a>
+				<a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#myModal" tabindex="-1" aria-disabled="true">About</a>
 			  </li>
 			  <li>
 				<input id="sites_autocomplete" label="search bar" value="Enter a site name" class="default-value" />
@@ -99,62 +99,6 @@
 		  </div>
 		</div>
 	</nav>
-	
-	<!--
-	<nav id="nav_menu" class="navbar navbar-expand-md navbar-dark bg-light" aria-label="Site Map Navigation Bar">
-		<div class="container-fluid">
-			<a class="navbar-brand" href="#">Expand at md</a>
-			  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			  </button>
-			<div class="navbar-header">
-				<div class="navbar-brand"><a href="https://www.deims.org"><img alt="DEIMS-SDR Logo" src="images/logo.png"></a></div>
-			</div>
-			
-			<div class="collapse navbar-collapse" id="navbarsExample04">
-				<ul class="nav navbar-nav">
-					<li>
-						<div class="dropdown">
-							<button id="layers_menu_button" class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Layers
-								<span class="caret"></span>
-							</button>
-
-							<ul id="layers_selection" class="dropdown-menu"></ul>
-						</div>
-					</li>
-					<li>
-						<div class="dropdown">
-							<button id="export_menu_button" class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Export
-								<span class="caret"></span>
-							</button>
-
-							<ul id="export_layers_selection" class="dropdown-menu"></ul>
-						</div>
-					</li>
-					<li>
-						<div class="dropdown">
-							<button id="additional_menu_button" class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Basemaps
-								<span class="caret"></span>
-							</button>
-
-							<ul id="additional_layers_selection" class="dropdown-menu">
-								<li>
-									<a href="#" title="Biogeographical regions, Europe">
-										<input type="checkbox" id="biogeo_europe"> Biogeographical regions, Europe</a>
-								</li>
-							</ul>
-						</div>
-					</li>
-					
-					<li>
-						<input id="sites_autocomplete" label="search bar" value="Enter a site name" class="default-value" />
-					</li>
-				</ul>
-			</div>
-			
-		</div>
-	</nav>
-	-->
 
 	<div id="wrapper">
 		<div class="container">
@@ -193,7 +137,7 @@
 			<!-- Modal content-->
 			<div class="modal-content">
 				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<button type="button" class="close" data-bs-dismiss="modal">&times;</button>
 					<h4 class="modal-title">About</h4>
 				</div>
 				<div class="modal-body">
@@ -209,7 +153,7 @@
 					</ul>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
 				</div>
 			</div>
 		</div>
