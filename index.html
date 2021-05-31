@@ -71,15 +71,15 @@
 			<ul class="navbar-nav me-auto mb-2 mb-md-0">
 
 			  <li class="nav-item dropdown">
-				<a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-bs-toggle="dropdown" aria-expanded="false">Layers</a>
+				<a class="nav-link dropdown-toggle" href="#" id="layers_menu_button" data-bs-toggle="dropdown" aria-expanded="false">Layers</a>
 				<ul class="dropdown-menu" aria-labelledby="dropdown04" id="layers_selection"></ul>
 			  </li>
 			  <li class="nav-item dropdown">
-				<a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-bs-toggle="dropdown" aria-expanded="false">Export</a>
+				<a class="nav-link dropdown-toggle" href="#" id="export_menu_button" data-bs-toggle="dropdown" aria-expanded="false">Export</a>
 				<ul class="dropdown-menu" aria-labelledby="dropdown04" id="export_layers_selection"></ul>
 			  </li>
 			  <li class="nav-item dropdown">
-				<a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-bs-toggle="dropdown" aria-expanded="false">Basemaps</a>
+				<a class="nav-link dropdown-toggle" href="#" id="additional_menu_button" data-bs-toggle="dropdown" aria-expanded="false">Basemaps</a>
 				<ul id="additional_layers_selection" class="dropdown-menu">
 					<li>
 						<a href="#" title="Biogeographical regions, Europe">
@@ -88,7 +88,7 @@
 				</ul>	
 			  </li>
 			  <li class="nav-item">
-				<a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#myModal" tabindex="-1" aria-disabled="true">About</a>
+				<a class="nav-link"  id="about_button" href="#" data-bs-toggle="modal" data-bs-target="#myModal" tabindex="-1" aria-disabled="true">About</a>
 			  </li>
 			  <li>
 				<input id="sites_autocomplete" label="search bar" value="Enter a site name" class="default-value" />
@@ -134,11 +134,10 @@
 
 	<div id="myModal" class="modal fade" role="dialog">
 		<div class="modal-dialog">
-			<!-- Modal content-->
 			<div class="modal-content">
 				<div class="modal-header">
-					<button type="button" class="close" data-bs-dismiss="modal">&times;</button>
-					<h4 class="modal-title">About</h4>
+					<h5 class="modal-title" id="exampleModalLabel">About</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
 				</div>
 				<div class="modal-body">
 					<p>This is an external app that accesses information on <a href="https://deims.org/">DEIMS-SDR</a>.</p>
