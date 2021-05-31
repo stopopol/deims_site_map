@@ -434,7 +434,7 @@ function render_info_box(url) {
 				content.innerHTML += "LTER Classification: " + information_obj["classification"] + "<br>";
 			}
 			content.innerHTML += site_url;
-			content.innerHTML += '<br>' + '<a href=' + json_address + ' class="no_underline_link">Download site information [.json]</a>';
+			content.innerHTML += '<br>' + '<a href=' + json_address + ' class="no_underline_link" style="white-space: nowrap;">Download site information [.json]</a>';
 			content.innerHTML += "<br><a id='something' href='javascript:;' class='no_underline_link'>Show more details ...</a>";
 
 			var current_coords = ol.proj.transform([information_obj["field_coordinates_lon"], information_obj["field_coordinates_lat"]], 'EPSG:4326', 'EPSG:3857');
