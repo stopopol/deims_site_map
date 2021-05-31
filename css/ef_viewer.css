@@ -73,6 +73,7 @@
 			margin-right: 0px !important;
 			margin-left: 0px !important;
 			position: relative;
+			max-width: none !important;
 		}
 		.row {
 			height: 100% !important;
@@ -101,8 +102,8 @@
 			border-top: 1px solid #333;
 		}
 		#wrapper {
-			height: calc(100% - 20px);
 			overflow: hidden;
+			max-width: none;
 		}
 
 		.dropdown-menu>li>a:focus, .dropdown-menu>li>a:hover {
