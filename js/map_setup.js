@@ -18,6 +18,7 @@ var autocomplete_field = document.getElementById("sites_autocomplete");
 var awesomplete = new Awesomplete(autocomplete_field);
 fill_autocomplete(wms_layer_name, awesomplete);
 
+
 // default text for Awesomplete
 $('.default-value').each(function () {
 	var $t = $(this),
@@ -134,8 +135,13 @@ $("#biogeo_europe").change(function () {
 
 // resize info-box on window change
 $(window).on('resize', function () {
-	var curr_height = $(document).height() - document.getElementById('closer').clientHeight;
-	$('.scrollable_style').css('max-height', curr_height);
+	var current_window_height = document.body.scrollHeight - document.getElementById('closer').clientHeight - document.getElementById('nav_menu').offsetHeight;
+	$('#map').css('height', current_window_height);
+});
+
+$(window).on('resize', function () {
+	var current_window_height = document.body.scrollHeight - document.getElementById('closer').clientHeight - document.getElementById('nav_menu').offsetHeight;
+	$('.scrollable_style').css('max-height', current_window_height);
 });
 
 /**
@@ -492,7 +498,10 @@ function render_info_box(url) {
 				});
 
 				function close_details() {
-					document.getElementById('map').setAttribute("style", "width:100%");
+					
+					var current_window_height = $(document).height() - document.getElementById('closer').clientHeight - document.getElementById('nav_menu').offsetHeight;
+					current_window_height = current_window_height + 'px';
+					document.getElementById('map').style.height = current_window_height;
 					document.getElementById('site_info').setAttribute("style", "width:0%", "height:0%");
 
 					map.updateSize();
