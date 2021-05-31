@@ -173,3 +173,25 @@
 .no_underline_link:hover {
     text-decoration: underline;
 }
+
+.custom_menu_link {
+    text-decoration: none;
+	margin-left: 10px;
+}
+
+.custom_menu_link:hover {
+    text-decoration: underline;
+}
+
+.custom_menu_list: {
+    color: white;
+}
+
+.custom_menu_list:hover {
+    background-color: #337AB7;
+}
+
+.custom_menu_list:hover > a {
+    color: white;
+	text-decoration: none;
+}
