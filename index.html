@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+	<!-- 
+		
+		Map viewer for JSON records provided by DEIMS-SDR
+		
+		It uses a WMS layer provided by the DEIMS-SDR geoserver. This layer includes the url to the respective JSON record of each site
+		it will parse that record and visualise the content both on a map and inside of an information box
+		
+	-->
+
+	<meta charset="utf-8" />
+	<title>DEIMS SDR - Site Map</title>
+	<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+
+	<!-- The line below is only needed for old environments like Internet Explorer and Android 4.x -->
+	<script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
+
+
+	<!-- Mandatory libraries for this to work -->
+	<script src="js/ol.js"></script>
+	<!-- v.4.6.5 for the map; https://openlayers.org/en/v4.6.5/examples/ -->
+
+	<!-- includes the list of uuids for comparing to available EuroCordex Data -->
+	<script src="js/uuid_list.js"></script>
+
+	<script src="js/jquery-3.6.0.min.js"></script>
+	<!-- for handling the xml, listeners, etc. -->
+	<script src="js/lodash.min.js"></script>
+	<!--  v.4.17.5, lodash just makes your life easier -->
+	<!-- https://github.com/abdmob/x2js from 4 Jan 2016-->
+	<script src="js/xml2json.js"  type="text/javascript" defer="defer"></script>
+	<!-- needed for transforming the xml into json; for easier handling -->
+	<script src="js/notify.js"></script>
+	<!-- v. from Oct 2016, used for status messages -->
+	<script src="js/parse_json.js"></script>
+	<!-- This is the code where the parsing of Inspire EF files happens -->
+	<script src="js/awesomplete.min.js"></script>
+	<!-- autocomplete library -->
+
+	<!-- for the layout; mandatory -->
+	<link rel="stylesheet" href="css/ef_viewer.css">
+	<link rel="stylesheet" href="css/awesomplete.css" />
+
+	<!-- for the layout; optional -->
+	<script type="text/javascript" src="bootstrap/js/bootstrap.js"></script>
+	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+	<link href="https://fonts.googleapis.com/css?family=Open Sans" rel="stylesheet">
+	<link rel="stylesheet" href="css/ol.css">
+
+</head>
+
+<!-- This page only includes everything you need for the map and the information box -->
+
+<body>
+	<h1 style="visibility:hidden; width:0; height:0; padding:0;margin:0;">DEIMS Site Map</h1>
+	
+	<nav id = "nav_menu" class="navbar navbar-expand-md navbar-light bg-light" aria-label="Fourth navbar example">
+		<div class="container-fluid">
+		  <a class="navbar-brand" href="#"><a href="https://www.deims.org"><img alt="DEIMS-SDR Logo" src="images/logo.png"></a></a>
+		  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		  </button>
+
+		  <div class="collapse navbar-collapse" id="navbarsExample04">
+			<ul class="navbar-nav me-auto mb-2 mb-md-0">
+
+			  <li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-bs-toggle="dropdown" aria-expanded="false">Layers</a>
+				<ul class="dropdown-menu" aria-labelledby="dropdown04" id="layers_selection"></ul>
+			  </li>
+			  <li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-bs-toggle="dropdown" aria-expanded="false">Export</a>
+				<ul class="dropdown-menu" aria-labelledby="dropdown04" id="export_layers_selection"></ul>
+			  </li>
+			  <li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-bs-toggle="dropdown" aria-expanded="false">Basemaps</a>
+				<ul id="additional_layers_selection" class="dropdown-menu">
+					<li>
+						<a href="#" title="Biogeographical regions, Europe">
+						<input type="checkbox" id="biogeo_europe"> Biogeographical regions, Europe</a>
+					</li>
+				</ul>	
+			  </li>
+			  <li class="nav-item">
+				<a class="nav-link" href="#" tabindex="-1" aria-disabled="true">About</a>
+			  </li>
+			  <li>
+				<input id="sites_autocomplete" label="search bar" value="Enter a site name" class="default-value" />
+			  </li>
+			  
+			</ul>
+
+		  </div>
+		</div>
+	</nav>
+	
+	<!--
+	<nav id="nav_menu" class="navbar navbar-expand-md navbar-dark bg-light" aria-label="Site Map Navigation Bar">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="#">Expand at md</a>
+			  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			  </button>
+			<div class="navbar-header">
+				<div class="navbar-brand"><a href="https://www.deims.org"><img alt="DEIMS-SDR Logo" src="images/logo.png"></a></div>
+			</div>
+			
+			<div class="collapse navbar-collapse" id="navbarsExample04">
+				<ul class="nav navbar-nav">
+					<li>
+						<div class="dropdown">
+							<button id="layers_menu_button" class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Layers
+								<span class="caret"></span>
+							</button>
+
+							<ul id="layers_selection" class="dropdown-menu"></ul>
+						</div>
+					</li>
+					<li>
+						<div class="dropdown">
+							<button id="export_menu_button" class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Export
+								<span class="caret"></span>
+							</button>
+
+							<ul id="export_layers_selection" class="dropdown-menu"></ul>
+						</div>
+					</li>
+					<li>
+						<div class="dropdown">
+							<button id="additional_menu_button" class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Basemaps
+								<span class="caret"></span>
+							</button>
+
+							<ul id="additional_layers_selection" class="dropdown-menu">
+								<li>
+									<a href="#" title="Biogeographical regions, Europe">
+										<input type="checkbox" id="biogeo_europe"> Biogeographical regions, Europe</a>
+								</li>
+							</ul>
+						</div>
+					</li>
+					
+					<li>
+						<input id="sites_autocomplete" label="search bar" value="Enter a site name" class="default-value" />
+					</li>
+				</ul>
+			</div>
+			
+		</div>
+	</nav>
+	-->
+
+	<div id="wrapper">
+		<div class="container">
+			<div id="legend_container">
+				<p>Legend</p>
+				<img src="http://bio.discomap.eea.europa.eu/arcgis/services/BioRegions/BiogeographicalRegions_LAEA/MapServer/WmsServer?request=GetLegendGraphic%26version=1.3.0%26format=image/png%26layer=0"
+				    alt="WMS Legend Image">
+			</div>
+
+			<div id="row_div" class="row">
+				<div id="map" class="col-sm-4"></div>
+				<div class="col-sm-8" id="site_info">
+					<div id="closer"></div>
+					<div id="detailed_information" class="scrollable_style"></div>
+				</div>
+			</div>
+		</div>
+
+		<div id="popup" class="ol-popup">
+			<a href="#" id="popup-closer" class="ol-popup-closer"></a>
+			<div id="popup-content"></div>
+		</div>
+
+		<script type="text/javascript" src="settings.js"></script>
+		<!-- stores the settings -->
+		<script type="text/javascript" src="js/map_setup.js"></script>
+		<!-- builds the actual map -->
+	</div>
+
+	<footer id="footer_id" class="footer">
+		<i class="fa fa-copyright"></i> 2021 Environment Agency Austria
+	</footer>
+
+	<div id="myModal" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">About</h4>
+				</div>
+				<div class="modal-body">
+					<p>This is an external app that accesses information on <a href="https://deims.org/">DEIMS-SDR</a>.</p>
+					<p>For further information please refer to these pages:</p>
+					<ul>
+						<li><a href="https://deims.org/about">About</a></li>
+						<li><a href="https://deims.org/terms">Terms</a></li>
+						<li><a href="https://deims.org/accessibility">Accessibility</a></li>
+						<li><a href="https://deims.org/imprint">Imprint</a></li>
+						<li><a href="https://deims.org/privacy">Privacy</a></li>
+						<li><a href="https://deims.org/contact">Contact</a></li>
+					</ul>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal for Biogeographical Regions -->
+	<div id="legend" class="modal fade fixed-bottom" role="dialog">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Legend</h4>
+				</div>
+				<div class="modal-body">
+					<img src="http://bio.discomap.eea.europa.eu/arcgis/services/BioRegions/BiogeographicalRegions_LAEA/MapServer/WmsServer?request=GetLegendGraphic%26version=1.3.0%26format=image/png%26layer=0">
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal -->
+	<div id="observation_modal" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<div class="modal-title" id="observation_modal_title"></div>
+				</div>
+				<div id="observation_modal_content" class="modal-body"></div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+</body>
+
+</html>
