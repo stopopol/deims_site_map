@@ -375,8 +375,8 @@ function parse_geoserver_getcapabilities(geoserver_getcapabilities_url) {
 						layer_title = '- ' + layer_title;
 					}
 
-					$('#layers_selection').append('<li><a href="#" title="' + layer_abstract + '" id =' + layer_name + '>' + layer_title + '</a></li>');
-					$('#export_layers_selection').append('<li><a href="' + layer_address + '" title="' + layer_abstract + ' as a Shapefile">' + layer_title + ' [.shp]</a></li>');
+					$('#layers_selection').append('<li class="custom_menu_list"><a href="#" class="custom_menu_link" title="' + layer_abstract + '" id =' + layer_name + '>' + layer_title + '</a></li>');
+					$('#export_layers_selection').append('<li class="custom_menu_list"><a href="' + layer_address + '"class="custom_menu_link" title="' + layer_abstract + ' as a Shapefile">' + layer_title + ' [.shp]</a></li>');
 
 				}
 			}
@@ -425,7 +425,7 @@ function render_info_box(url) {
 		if (features[0]) {
 			var properties = features[0];
 			var information_obj = properties["properties"];
-			var site_url = "<a href='" + information_obj["deimsid"] + "' target='_blank'>View record on DEIMS-SDR<sup><i class='fa fa-external-link' aria-hidden='true'></i></sup></a>";
+			var site_url = "<a href='" + information_obj["deimsid"] + "' class='no_underline_link' target='_blank'>View record on DEIMS-SDR<sup><i class='fa fa-external-link' aria-hidden='true'></i></sup></a>";
 			var json_address = 'https://deims.org/api/sites/' + information_obj["deimsid"].substr(18);
 
 			content.innerHTML = "<h4>" + information_obj["name"] + "</h4>";
@@ -434,8 +434,8 @@ function render_info_box(url) {
 				content.innerHTML += "LTER Classification: " + information_obj["classification"] + "<br>";
 			}
 			content.innerHTML += site_url;
-			content.innerHTML += '<br>' + '<a href=' + json_address + '>Download site information [.json]</a>';
-			content.innerHTML += "<br><a id='something' href='javascript:;'>Show more details ...</a>";
+			content.innerHTML += '<br>' + '<a href=' + json_address + ' class="no_underline_link">Download site information [.json]</a>';
+			content.innerHTML += "<br><a id='something' href='javascript:;' class='no_underline_link'>Show more details ...</a>";
 
 			var current_coords = ol.proj.transform([information_obj["field_coordinates_lon"], information_obj["field_coordinates_lat"]], 'EPSG:4326', 'EPSG:3857');
 
