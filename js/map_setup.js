@@ -111,8 +111,12 @@ $('#layers_selection').on('click', "a", function () {
 
 	fill_autocomplete(wms_layer_name, awesomplete);
 
+	
 	document.getElementById('map').setAttribute("style", "width:100%");
 	document.getElementById('site_info').setAttribute("style", "width:0%", "height:0%");
+	document.getElementById('map').style.height = window.innerHeight - document.getElementById('footer_id').clientHeight - document.getElementById('nav_menu').offsetHeight + 'px';					
+	document.getElementById('wrapper').style.height = window.innerHeight - document.getElementById('footer_id').clientHeight - document.getElementById('nav_menu').offsetHeight + 'px';					
+	
 	map.updateSize();
 	vectorSource.clear();
 	overlay.setPosition(undefined);
