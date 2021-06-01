@@ -60,7 +60,7 @@
 <body>
 	<h1 style="visibility:hidden; width:0; height:0; padding:0;margin:0;">DEIMS Site Map</h1>
 	
-	<nav id = "nav_menu" class="navbar navbar-expand-md navbar-light bg-light" aria-label="Fourth navbar example">
+	<nav id="nav_menu" class="navbar navbar-expand-md navbar-light bg-light" aria-label="Fourth navbar example">
 		<div class="container-fluid">
 		  <a class="navbar-brand" href="#"><a href="https://www.deims.org"><img alt="DEIMS-SDR Logo" src="images/logo.png"></a></a>
 		  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
@@ -192,6 +192,15 @@
 
 		</div>
 	</div>
+
+<script>
+// self executing function here
+(function() {
+   var current_window_height = $(document).height() - document.getElementById('footer_id').clientHeight - document.getElementById('nav_menu').offsetHeight;
+	current_window_height = current_window_height + 'px';
+	document.getElementById('map').style.height = current_window_height;
+})();
+</script>
 
 </body>
 
