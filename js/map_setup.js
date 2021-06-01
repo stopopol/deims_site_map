@@ -18,7 +18,6 @@ var autocomplete_field = document.getElementById("sites_autocomplete");
 var awesomplete = new Awesomplete(autocomplete_field);
 fill_autocomplete(wms_layer_name, awesomplete);
 
-
 // default text for Awesomplete
 $('.default-value').each(function () {
 	var $t = $(this),
@@ -91,13 +90,19 @@ $(document).keyup(function (e) {
  */
 $('#layers_selection').on('click', "a", function () {
 	$('#layers_selection li a').css({
-		'background-color': '',
 		"color": ""
 	});
-	$(this).css({
+	$('#layers_selection li').css({
+		'background-color': '',
+	});
+	$(this).parent().css({
 		"background-color": "#337ab7",
+	});
+	$(this).css({
 		"color": "white"
 	});
+
+
 	wms_layer_name = $(this).attr('id');
 	var params_obj = {
 		'LAYERS': wms_layer_name
@@ -133,16 +138,23 @@ $("#biogeo_europe").change(function () {
 	}
 });
 
-// resize info-box on window change
+
+// resize info-box and map on window change
 $(window).on('resize', function () {
-	var current_window_height = document.body.scrollHeight - document.getElementById('closer').clientHeight - document.getElementById('nav_menu').offsetHeight;
-	$('#map').css('height', current_window_height);
+	resize_elements();
 });
 
-$(window).on('resize', function () {
-	var current_window_height = document.body.scrollHeight - document.getElementById('closer').clientHeight - document.getElementById('nav_menu').offsetHeight;
-	$('.scrollable_style').css('max-height', current_window_height);
+$( document ).ready(function() {
+	resize_elements();
 });
+
+
+function resize_elements() {
+	document.getElementById('map').style.height = window.innerHeight - document.getElementById('footer_id').clientHeight - document.getElementById('nav_menu').offsetHeight + 'px';					
+	var current_infobox_height = window.innerHeight - document.getElementById('closer').scrollHeight - document.getElementById('nav_menu').scrollHeight  - document.getElementById('footer_id').clientHeight;
+	$('.scrollable_style').css('max-height', current_infobox_height);
+}
+
 
 /**
  * Elements that make up the popup.
@@ -266,8 +278,6 @@ app.ResetMapControl = function (opt_options) {
 };
 ol.inherits(app.ResetMapControl, ol.control.Control);
 
-
-
 var map = new ol.Map({
 	controls: ol.control.defaults({
 		attributionOptions: {
@@ -386,12 +396,12 @@ function parse_geoserver_getcapabilities(geoserver_getcapabilities_url) {
 
 				}
 			}
-			$('a').filter(function (index) {
-				return $(this).attr('id') === wms_layer_name;
-			}).css({
-				"background-color": "#337ab7",
-				"color": "white"
-			});
+			
+			var parent_list_element = document.getElementById(wms_layer_name).parentElement;
+			parent_list_element.style.backgroundColor = "#337ab7";
+			
+			document.getElementById(wms_layer_name).style.color = "white";
+
 		}
 		if (x.status != 200) {
 			$('#layers_selection').append('<li><a href="#" id="error_layer">Error: Layers could not be loaded :/</a></li>');
@@ -474,7 +484,9 @@ function render_info_box(url) {
 			$('#something').click(function () {
 
 				site_info_var = true;
-				document.getElementById('map').setAttribute("style", "width:50%", "height:calc(100% - 15px)");
+				document.getElementById('map').setAttribute("style", "width:50%");
+				document.getElementById('map').style.height = $(document).innerHeight() - document.getElementById('footer_id').clientHeight - document.getElementById('nav_menu').offsetHeight + 'px';
+				
 				document.getElementById('site_info').setAttribute("style", "width:50%", "padding-bottom: 15px");
 				map.updateSize();
 
@@ -499,11 +511,9 @@ function render_info_box(url) {
 
 				function close_details() {
 					
-					var current_window_height = $(document).height() - document.getElementById('closer').clientHeight - document.getElementById('nav_menu').offsetHeight;
-					current_window_height = current_window_height + 'px';
-					document.getElementById('map').style.height = current_window_height;
-					document.getElementById('site_info').setAttribute("style", "width:0%", "height:0%");
-
+					document.getElementById('map').style.width = "100%";
+					document.getElementById('site_info').style.height = "0px";
+					
 					map.updateSize();
 					vectorSource.clear();
 					hydrological_catchment_source.clear();
