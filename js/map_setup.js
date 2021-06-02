@@ -148,7 +148,7 @@ $(window).on('resize', function () {
 	resize_elements();
 });
 
-$( document ).ready(function() {
+$(document).ready(function() {
 	resize_elements();
 });
 
