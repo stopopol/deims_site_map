@@ -70,7 +70,7 @@ $('#detailed_information').on('click', "a.obs_link", function () {
 	var current_observation = $(this).attr('id');
 	document.getElementById('observation_modal_title').innerHTML = "<h3>" + current_observation_title + "</h3>";
 	document.getElementById('observation_modal_content').innerHTML = "<h4>What do you want to do with the observation?</h4><br>";
-	document.getElementById('observation_modal_content').innerHTML += "<a href ='" + current_observation + "' target='_blank'>" + "Go to the original record<sup><i class='fa fa-external-link' aria-hidden='true'></i></sup></a><br>";
+	document.getElementById('observation_modal_content').innerHTML += "<a href ='" + current_observation + "'class='no_underline_link' target='_blank'>" + "Go to the original record<sup><i class='fa fa-external-link' aria-hidden='true'></i></sup></a><br>";
 
 });
 
