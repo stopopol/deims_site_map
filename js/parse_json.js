@@ -101,7 +101,7 @@ function parse_json(json_address) {
 					
 						var hasObservation_url = jsonObj["attributes"]["relatedResources"][x]["id"]["prefix"] + jsonObj["attributes"]["relatedResources"][x]["id"]["suffix"];	
 						var hasObservation_title = jsonObj["attributes"]["relatedResources"][x]["title"];			
-						sidebar_object_dom.innerHTML += "<a id="+ hasObservation_url +" href='#' class='obs_link no_underline_link' data-toggle='modal' data-target='#observation_modal'>" + hasObservation_title + "</a><br>";
+						sidebar_object_dom.innerHTML += "<a id="+ hasObservation_url +" href='#' class='obs_link no_underline_link' data-bs-toggle='modal' data-bs-target='#observation_modal'>" + hasObservation_title + "</a><br>";
 					
 				}
 	
