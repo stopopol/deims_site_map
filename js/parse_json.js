@@ -238,7 +238,7 @@ function parse_json(json_address) {
 						if (location_request.readyState == 4 && location_request.status == 200) {
 							var location_json = JSON.parse(location_request.responseText);
 							if (location_json['properties']['locationType']) {
-								if (location_json['properties']['locationType']['label'] = 'Hydrological Catchment') {
+								if (location_json['properties']['locationType']['label'] == 'Hydrological Catchment') {
 									var format = new ol.format.GeoJSON();
 									
 									var hydrological_catchment_feature = format.readFeature(location_json, {
