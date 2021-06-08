@@ -13,14 +13,10 @@
 	// define the initial layer to be displayed; excluding the workspace name
 		// All sites available on DEIMS-SDR
 		var wms_layer_name = "deims_all_sites";
-		// All sites participating in the H2020 project EcoPotential
-		//var wms_layer_name = "ecopotential_all";
 		// All sites that are part of ILTER
 		//var wms_layer_name = "lter_all_formal";	
 		// All sites that are part of LTER Europe
 		//var wms_layer_name = "lter_eu_formal";
-		// All sites participating in the Teabag initiative
-		//var wms_layer_name = "teabag_all";
 		
 		wms_layer_name = geoserver_workspace + ":" + wms_layer_name;
 	
