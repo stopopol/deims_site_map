@@ -41,7 +41,7 @@ function parse_json(json_address) {
 			// media monitored
 			if (jsonObj["attributes"]["environmentalCharacteristics"]["geoBonBiome"] != null) {
 						
-				sidebar_object_dom.innerHTML += "<br><b>media monitored: </b>";	
+				sidebar_object_dom.innerHTML += "<br><b>media monitored:</b>";	
 				// styled icons				
 				switch(jsonObj["attributes"]["environmentalCharacteristics"]["geoBonBiome"]) {
 					case "terrestrial":
@@ -84,7 +84,7 @@ function parse_json(json_address) {
 			// Observing capabilities
 			if (jsonObj["attributes"]["focusDesignScale"]["parameters"] != null) {
 				var list_of_parameters = '';
-				sidebar_object_dom.innerHTML += '<br><b>ObservingCapabilities:</b> ';
+				sidebar_object_dom.innerHTML += '<br><b>ObservingCapabilities:</b>';
 				for (x in jsonObj["attributes"]["focusDesignScale"]["parameters"]) {
 					if (x["label"] != "" ) {
 						list_of_parameters += jsonObj["attributes"]["focusDesignScale"]["parameters"][x]["label"] + "; ";
