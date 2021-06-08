@@ -31,7 +31,7 @@ function parse_json(json_address) {
 			
 			// Title
 			sidebar_object_dom.innerHTML += "<h1>" + jsonObj["title"] + "</h1>";
-			sidebar_object_dom.innerHTML += "<p>" + "<b>DEIMS.iD:</b> <a href='https://deims.org/" + uuid + "' target='_blank' class='no_underline_link'>https://deims.org/" + uuid + "<sup><i class='fa fa-external-link' aria-hidden='true'></i></sup></a></p><";
+			sidebar_object_dom.innerHTML += "<p>" + "<b>DEIMS.iD:</b> <a href='https://deims.org/" + uuid + "' target='_blank' class='no_underline_link'>https://deims.org/" + uuid + "<sup><i class='fa fa-external-link' aria-hidden='true'></i></sup></a></p>";
 			
 			// description
 			if (jsonObj["attributes"]["general"]["abstract"]) {
