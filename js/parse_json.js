@@ -19,8 +19,7 @@ function parse_json(json_address) {
 		if (x.readyState == 4 && x.status == 200) {
 			var jsonObj = JSON.parse(x.responseText);
 		
-			var curr_height = $( document ).height() - document.getElementById('footer_id').clientHeight - document.getElementById('closer').clientHeight - document.getElementById('nav_menu').clientHeight;
-			$('.scrollable_style').css('max-height', curr_height);
+			resize_elements();
 			
 			var uuid = jsonObj["id"]["suffix"];
 				
