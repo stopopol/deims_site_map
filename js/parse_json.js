@@ -41,7 +41,7 @@ function parse_json(json_address) {
 			// media monitored
 			if (jsonObj["attributes"]["environmentalCharacteristics"]["geoBonBiome"] != null) {
 						
-				sidebar_object_dom.innerHTML += "<br><b>media monitored:</b>";	
+				sidebar_object_dom.innerHTML += "<br><b>media monitored: </b>";	
 				// styled icons				
 				switch(jsonObj["attributes"]["environmentalCharacteristics"]["geoBonBiome"]) {
 					case "terrestrial":
