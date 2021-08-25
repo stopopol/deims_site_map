@@ -88,22 +88,23 @@ $(document).keyup(function (e) {
  * get desired layer, update wms layer according to selection and print status message
  *
  */
-$('#layers_selection').on('click', "a", function () {
+ 
+// to do here
+$('#layers_selection').on('click', "li", function () {
 	$('#layers_selection li a').css({
 		"color": ""
 	});
 	$('#layers_selection li').css({
 		'background-color': '',
 	});
-	$(this).parent().css({
+	$(this).css({
 		"background-color": "#337ab7",
 	});
-	$(this).css({
+	$(this).find("a").css({
 		"color": "white"
 	});
 
-
-	wms_layer_name = $(this).attr('id');
+	wms_layer_name = $(this).find("a").attr('id');
 	var params_obj = {
 		'LAYERS': wms_layer_name
 	};
