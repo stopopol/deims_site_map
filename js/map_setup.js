@@ -84,7 +84,7 @@ $(document).keyup(function (e) {
 
 // Reset map extent on R key press
 $(document).keyup(function (e) {
-	if (e.keyCode == 82) { // escape key maps to keycode `27`
+	if (e.keyCode == 82 && !$('#sites_autocomplete').is(':focus')) { // escape key maps to keycode `27`
 		set_to_wms_extent(geoserver_getcapabilities_url);
 	}
 });
