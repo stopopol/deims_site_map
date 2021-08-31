@@ -525,7 +525,8 @@ function render_info_box(url) {
 
 					document.getElementById('map').style.width = "100%";
 					document.getElementById('site_info').style.height = "0px";
-					document.getElementById('site_info').innerHTML = "";
+					document.getElementById('detailed_information').innerHTML = "";
+					document.getElementById('closer').innerHTML = "";
 
 					map.updateSize();
 					vectorSource.clear();
