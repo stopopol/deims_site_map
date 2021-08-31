@@ -89,6 +89,26 @@ $(document).keyup(function (e) {
 	}
 });
 
+// zoom in
+$(document).keyup(function (e) {
+	if (e.keyCode == 107 && !$('#sites_autocomplete').is(':focus')) {
+		map.getView().animate({
+		  zoom: map.getView().getZoom() + 1,
+		  duration: 250
+		})
+	}
+});
+
+// zoom out
+$(document).keyup(function (e) {
+	if ((e.keyCode == 189 || e.keyCode == 109) && !$('#sites_autocomplete').is(':focus')) {
+		map.getView().animate({
+		  zoom: map.getView().getZoom() - 1,
+		  duration: 250
+		})
+	}
+});
+
 /**
  * Layers listener
  *
