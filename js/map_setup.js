@@ -522,10 +522,11 @@ function render_info_box(url) {
 				});
 
 				function close_details() {
-					
+
 					document.getElementById('map').style.width = "100%";
 					document.getElementById('site_info').style.height = "0px";
-					
+					document.getElementById('site_info').innerHTML = "";
+
 					map.updateSize();
 					vectorSource.clear();
 					hydrological_catchment_source.clear();
