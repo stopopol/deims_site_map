@@ -39,28 +39,29 @@ function parse_json(json_address) {
 			}
 				
 			// media monitored
-			if (jsonObj["attributes"]["environmentalCharacteristics"]["geoBonBiome"] != null) {
-						
+			if (jsonObj["attributes"]["environmentalCharacteristics"]["geoBonBiome"] != null) {		
 				sidebar_object_dom.innerHTML += "<br><b>media monitored: </b>";	
-				// styled icons				
-				switch(jsonObj["attributes"]["environmentalCharacteristics"]["geoBonBiome"]) {
-					case "terrestrial":
-						sidebar_object_dom.innerHTML += "Terrestrial <i class='fa fa-tree' aria-hidden='true'></i>";
-						break;
-					case "fresh_water_rivers":
-						sidebar_object_dom.innerHTML += "Fresh Water Rivers <i class='fa fa-tint' aria-hidden='true'></i>";
-						break;
-					case "fresh_water_lakes":
-						sidebar_object_dom.innerHTML += "Fresh Water Lakes <i class='fa fa-tint' aria-hidden='true'></i>";
-						break;
-					case "marine":
-						sidebar_object_dom.innerHTML += "Marine <i class='fa fa-tint' aria-hidden='true'></i>";
-						break;
-					case "coastal":
-						sidebar_object_dom.innerHTML += "Coastal <i class='fa fa-tint' aria-hidden='true'></i>";
-						break;
+				// styled icons		
+				var geobonbiome = jsonObj["attributes"]["environmentalCharacteristics"]["geoBonBiome"];
+				for (let i = 0; i < geobonbiome.length; i++) {
+					switch(geobonbiome[i]) {
+						case "Terrestrial":
+							sidebar_object_dom.innerHTML += "Terrestrial <i class='fa fa-tree' aria-hidden='true'></i><br>";
+							break;
+						case "Fresh water lakes river":
+							sidebar_object_dom.innerHTML += "Fresh Water Rivers <i class='fa fa-tint' aria-hidden='true'></i><br>";
+							break;
+						case "Fresh water lakes":
+							sidebar_object_dom.innerHTML += "Fresh Water Lakes <i class='fa fa-tint' aria-hidden='true'></i><br>";
+							break;
+						case "Marine":
+							sidebar_object_dom.innerHTML += "Marine <i class='fa fa-tint' aria-hidden='true'></i><br>";
+							break;
+						case "Coastal":
+							sidebar_object_dom.innerHTML += "Coastal <i class='fa fa-tint' aria-hidden='true'></i><br>";
+							break;
+					}
 				}
-				sidebar_object_dom.innerHTML += "<br>";
 			}
 			
 			// onlineResource
