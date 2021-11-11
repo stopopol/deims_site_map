@@ -37,6 +37,7 @@ $('.default-value').each(function () {
 	});
 });
 
+
 // event listener for Awesomplete
 Awesomplete.$('#sites_autocomplete').addEventListener("awesomplete-selectcomplete", function () {
 
@@ -53,7 +54,9 @@ Awesomplete.$('#sites_autocomplete').addEventListener("awesomplete-selectcomplet
 	});
 
 	var temp_deimsid = inter["deimsid"];
+	
 	var query_url = geoserver_base_url + geoserver_workspace + "/ows?service=WFS&version=2.0.0&request=GetFeature&typeName=" + wms_layer_name + "&CQL_FILTER=deimsid='" + temp_deimsid + "'&outputFormat=application%2Fjson";
+	console.log(query_url);
 
 	view.animate({
 		center: coords_3857,
@@ -139,7 +142,6 @@ $('#layers_selection').on('click', "li", function () {
 
 	fill_autocomplete(wms_layer_name, awesomplete);
 
-	
 	document.getElementById('map').setAttribute("style", "width:100%");
 	document.getElementById('site_info').setAttribute("style", "width:0%", "height:0%");
 	document.getElementById('map').style.height = window.innerHeight - document.getElementById('footer_id').clientHeight - document.getElementById('nav_menu').offsetHeight + 'px';					
@@ -325,7 +327,18 @@ var map = new ol.Map({
 });
 
 // set first extent of map
-set_to_wms_extent(geoserver_getcapabilities_url);
+
+// for reading the deims.id from the url parameters
+if (window.location.search) {
+	var urlParams = new URLSearchParams(window.location.search);
+	if (urlParams.get('id')) {	
+		show_site_details("https://deims.org/api/sites/" + urlParams.get('id'));
+	}
+}
+else {
+	set_to_wms_extent(geoserver_getcapabilities_url);
+}
+
 
 function set_to_wms_extent(geoserver_getcapabilities_url) {
 
@@ -465,6 +478,50 @@ map.on('singleclick', function (evt) {
 	}
 });
 
+function close_details() {
+	document.getElementById('map').style.width = "100%";
+	document.getElementById('site_info').style.height = "0px";
+	document.getElementById('detailed_information').innerHTML = "";
+	document.getElementById('closer').innerHTML = "";
+
+	map.updateSize();
+	vectorSource.clear();
+	hydrological_catchment_source.clear();
+
+	$("#closer_button").remove();
+	site_info_var = false;
+
+}
+
+function show_site_details(json_address) {
+	site_info_var = true;
+	document.getElementById('map').setAttribute("style", "width:50%");
+	document.getElementById('map').style.height = $(document).innerHeight() - document.getElementById('nav_menu').offsetHeight + 'px';
+				
+	document.getElementById('site_info').setAttribute("style", "width:50%", "padding-bottom: 15px");
+	map.updateSize();
+
+	overlay.setPosition(undefined);
+	closer.blur();
+
+	parse_json(json_address);
+	document.getElementById('closer').innerHTML = "<br><a id='closer_button' class='no_underline_link' href='javascript:;'><i class='fa fa-times' aria-hidden='true'>&nbsp;</i>Close</a>";
+
+	// Listener for closer details
+	$('#closer_button').click(function () {
+		close_details();
+	})
+
+	var closer_listener = $(document).keyup(function (e) {
+		if (e.keyCode == 27) { // escape key maps to keycode `27`
+			if (site_info_var == true) {
+				close_details();
+			}
+		}
+	});
+}
+
+
 function render_info_box(url) {
 
 	$.getJSON(url, function (data) {
@@ -514,49 +571,7 @@ function render_info_box(url) {
 
 			// Listener for site details 
 			$('#something').click(function () {
-
-				site_info_var = true;
-				document.getElementById('map').setAttribute("style", "width:50%");
-				document.getElementById('map').style.height = $(document).innerHeight() - document.getElementById('footer_id').clientHeight - document.getElementById('nav_menu').offsetHeight + 'px';
-				
-				document.getElementById('site_info').setAttribute("style", "width:50%", "padding-bottom: 15px");
-				map.updateSize();
-
-				overlay.setPosition(undefined);
-				closer.blur();
-
-				parse_json(json_address);
-				document.getElementById('closer').innerHTML = "<br><a id='closer_button' class='no_underline_link' href='javascript:;'><i class='fa fa-times' aria-hidden='true'>&nbsp;</i>Close</a>";
-
-				// Listener for closer details
-				$('#closer_button').click(function () {
-					close_details();
-				})
-
-				var closer_listener = $(document).keyup(function (e) {
-					if (e.keyCode == 27) { // escape key maps to keycode `27`
-						if (site_info_var == true) {
-							close_details();
-						}
-					}
-				});
-
-				function close_details() {
-
-					document.getElementById('map').style.width = "100%";
-					document.getElementById('site_info').style.height = "0px";
-					document.getElementById('detailed_information').innerHTML = "";
-					document.getElementById('closer').innerHTML = "";
-
-					map.updateSize();
-					vectorSource.clear();
-					hydrological_catchment_source.clear();
-
-					$("#closer_button").remove();
-					site_info_var = false;
-
-				}
-
+				show_site_details(json_address);
 			})
 		};
 	});
