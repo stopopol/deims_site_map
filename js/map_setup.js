@@ -505,7 +505,7 @@ function show_site_details(json_address) {
 	closer.blur();
 
 	parse_json(json_address);
-	document.getElementById('closer').innerHTML = "<br><a id='closer_button' class='no_underline_link' href='javascript:;'><i class='fa fa-times' aria-hidden='true'>&nbsp;</i>Close</a>";
+	document.getElementById('closer').innerHTML = "<a id='closer_button' class='no_underline_link' href='javascript:;'><i class='fa fa-times' aria-hidden='true'>&nbsp;</i>Close</a>";
 
 	// Listener for closer details
 	$('#closer_button').click(function () {
