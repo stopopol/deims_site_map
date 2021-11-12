@@ -218,6 +218,8 @@ function parse_json(json_address) {
 				sidebar_object_dom.innerHTML += table_string;
 				
 			}
+			
+			sidebar_object_dom.innerHTML += "<br>";
 
 			var site_boundaries = jsonObj["attributes"]["geographic"]["boundaries"];
 	
