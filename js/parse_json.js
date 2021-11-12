@@ -246,10 +246,8 @@ function parse_json(json_address) {
 										var location_json = JSON.parse(xhr[i].responseText);
 										if (location_json['properties']['locationType']) {
 											// add related locations
-											
 											if (location_json['properties']['locationType']['label'] == 'Hydrological Catchment') {
 												var format = new ol.format.GeoJSON();
-												console.log ("success number: ");
 												var hydrological_catchment_feature = format.readFeature(location_json, {
 													dataProjection: 'EPSG:4326',
 													featureProjection: 'EPSG:3857'
