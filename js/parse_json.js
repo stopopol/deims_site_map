@@ -48,7 +48,7 @@ function parse_json(json_address) {
 						case "Terrestrial":
 							sidebar_object_dom.innerHTML += "Terrestrial <i class='fa fa-tree' aria-hidden='true'></i><br>";
 							break;
-						case "Fresh water lakes river":
+						case "Fresh water rivers":
 							sidebar_object_dom.innerHTML += "Fresh Water Rivers <i class='fa fa-tint' aria-hidden='true'></i><br>";
 							break;
 						case "Fresh water lakes":
@@ -227,34 +227,41 @@ function parse_json(json_address) {
 				return;
 			}
 			
-			// hydrological catchment
+			// add related locations
 			var related_locations = jsonObj["attributes"]["geographic"]["relatedLocations"];
 			// if there are related locations, check for hydrological catchment
 			if (related_locations) {
-				for (var i = 0; i < related_locations.length; i++) {
-					var location_url = "https://deims.org/api/locations/" + related_locations[i]['id']['suffix'];
-					var location_request = new XMLHttpRequest();
-					location_request.open("GET", location_url, true);
-					location_request.onreadystatechange = function() {
-						if (location_request.readyState == 4 && location_request.status == 200) {
-							var location_json = JSON.parse(location_request.responseText);
-							if (location_json['properties']['locationType']) {
-								if (location_json['properties']['locationType']['label'] == 'Hydrological Catchment') {
-									var format = new ol.format.GeoJSON();
-									
-									var hydrological_catchment_feature = format.readFeature(location_json, {
-										dataProjection: 'EPSG:4326',
-										featureProjection: 'EPSG:3857'
-									});
-									
-									hydrological_catchment_source.addFeature(hydrological_catchment_feature);
-								}
-							}
+				
+				    var f = (function(){
+						var xhr = [], i;
+						for(i = 0; i < related_locations.length; i++){ //for loop
+							(function(i){
+								xhr[i] = new XMLHttpRequest();
+								url = "https://deims.org/api/locations/" + related_locations[i]['id']['suffix'];
+								xhr[i].open("GET", url, true);
+								xhr[i].onreadystatechange = function(){
+									if (xhr[i].readyState === 4 && xhr[i].status === 200){
+										var location_json = JSON.parse(xhr[i].responseText);
+										if (location_json['properties']['locationType']) {
+											// add related locations
+											
+											if (location_json['properties']['locationType']['label'] == 'Hydrological Catchment') {
+												var format = new ol.format.GeoJSON();
+												console.log ("success number: ");
+												var hydrological_catchment_feature = format.readFeature(location_json, {
+													dataProjection: 'EPSG:4326',
+													featureProjection: 'EPSG:3857'
+												});
+												
+												hydrological_catchment_source.addFeature(hydrological_catchment_feature);
+											}
+										}
+									}
+								};
+								xhr[i].send();
+							})(i);
 						}
-					}
-					location_request.send(null);
-				}
-					
+					})();
 			}
 				
 			// this part reads the geometry from the record and adds it to the map;
