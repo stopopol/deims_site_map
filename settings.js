@@ -27,7 +27,7 @@
 				
 		var white_stroke = new ol.style.Stroke({
 		   color: '#FFFFFF',
-		   width: 1.25
+		   width: 1.5
 		});
 				
 		var styles = [
@@ -50,7 +50,7 @@
 				
 		var blue_dashed_stroke = new ol.style.Stroke({
 		   color: '#336699',
-		   width: 3,
+		   width: 2,
 		   lineDash: [.1, 5] //or other combinations
 		});
 				
@@ -60,3 +60,20 @@
 			 stroke: blue_dashed_stroke,
 		   })
 		];
+		
+	//	sampling_area_layer				
+		var white_dashed_stroke = new ol.style.Stroke({
+		   color: '#FFFFFF',
+		   width: 2,
+		   lineDash: [.1, 5] //or other combinations
+		});
+				
+		var sampling_area_styles = [
+		   new ol.style.Style({
+			 image: new ol.style.Circle({
+			   stroke: white_stroke,
+			   radius: 3
+			 }),
+			 stroke: white_dashed_stroke,
+		   })
+		];	
