@@ -507,7 +507,7 @@ function show_site_details(json_address) {
 	
 	document.getElementById('map').setAttribute("style", "width:50%");
 	
-	// the footer dom can be rendered before the function is called, this is a dirty fix
+	// the footer dom sometimes isn't rendered before the function is called, this is a dirty fix
 	if (document.getElementById('footer_id')) {
 		document.getElementById('map').style.height = $(document).innerHeight() - document.getElementById('footer_id').offsetHeight - document.getElementById('nav_menu').offsetHeight + 'px';
 	}
