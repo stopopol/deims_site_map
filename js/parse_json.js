@@ -245,15 +245,19 @@ function parse_json(json_address) {
 									if (xhr[i].readyState === 4 && xhr[i].status === 200){
 										var location_json = JSON.parse(xhr[i].responseText);
 										if (location_json['properties']['locationType']) {
+											var format = new ol.format.GeoJSON();
+											var feature = format.readFeature(location_json, {
+												dataProjection: 'EPSG:4326',
+												featureProjection: 'EPSG:3857'
+											});
 											// add related locations
-											if (location_json['properties']['locationType']['label'] == 'Hydrological Catchment') {
-												var format = new ol.format.GeoJSON();
-												var hydrological_catchment_feature = format.readFeature(location_json, {
-													dataProjection: 'EPSG:4326',
-													featureProjection: 'EPSG:3857'
-												});
-												
-												hydrological_catchment_source.addFeature(hydrological_catchment_feature);
+											switch (location_json['properties']['locationType']['label']) {
+												case 'Hydrological Catchment':
+													hydrological_catchment_source.addFeature(feature);
+													break;
+												case 'Sampling Area':
+													sampling_area_source.addFeature(feature);
+													break;
 											}
 										}
 									}

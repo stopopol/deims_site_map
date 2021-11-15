@@ -56,7 +56,6 @@ Awesomplete.$('#sites_autocomplete').addEventListener("awesomplete-selectcomplet
 	var temp_deimsid = inter["deimsid"];
 	
 	var query_url = geoserver_base_url + geoserver_workspace + "/ows?service=WFS&version=2.0.0&request=GetFeature&typeName=" + wms_layer_name + "&CQL_FILTER=deimsid='" + temp_deimsid + "'&outputFormat=application%2Fjson";
-	console.log(query_url);
 
 	view.animate({
 		center: coords_3857,
@@ -221,6 +220,7 @@ closer.onclick = function () {
 
 var vectorSource = new ol.source.Vector({});
 var hydrological_catchment_source = new ol.source.Vector({});
+var sampling_area_source = new ol.source.Vector({});
 var point_layer = new ol.layer.Vector({
 	source: vectorSource,
 	style: styles,
@@ -231,6 +231,13 @@ var point_layer = new ol.layer.Vector({
 var hydrological_catchment_layer = new ol.layer.Vector({
 	source: hydrological_catchment_source,
 	style: hydro_styles,
+	projection: 'EPSG:3857',
+	zIndex: '2'
+});
+
+var sampling_area_layer = new ol.layer.Vector({
+	source: sampling_area_source,
+	style: sampling_area_styles,
 	projection: 'EPSG:3857',
 	zIndex: '2'
 });
@@ -267,7 +274,8 @@ var osm = [
 	bgr,
 	deimsWmsLayer,
 	point_layer,
-	hydrological_catchment_layer
+	hydrological_catchment_layer,
+	sampling_area_layer
 ];
 
 var view = new ol.View({
@@ -487,6 +495,7 @@ function close_details() {
 	map.updateSize();
 	vectorSource.clear();
 	hydrological_catchment_source.clear();
+	sampling_area_source.clear();
 
 	$("#closer_button").remove();
 	site_info_var = false;
