@@ -339,8 +339,11 @@ var map = new ol.Map({
 // for reading the deims.id from the url parameters
 if (window.location.search) {
 	var urlParams = new URLSearchParams(window.location.search);
-	if (urlParams.get('id')) {	
-		show_site_details("https://deims.org/api/sites/" + urlParams.get('id'));
+	if (urlParams.get('id')) {
+		// wait a bit for the footer id to render
+		setTimeout(function(){
+			show_site_details("https://deims.org/api/sites/" + urlParams.get('id'));
+		}, 500);
 	}
 }
 else {
@@ -507,13 +510,7 @@ function show_site_details(json_address) {
 	
 	document.getElementById('map').setAttribute("style", "width:50%");
 	
-	// the footer dom sometimes isn't rendered before the function is called, this is a dirty fix
-	if (document.getElementById('footer_id')) {
-		document.getElementById('map').style.height = $(document).innerHeight() - document.getElementById('footer_id').offsetHeight - document.getElementById('nav_menu').offsetHeight + 'px';
-	}
-	else {
-		document.getElementById('map').style.height = $(document).innerHeight() - 25 - document.getElementById('nav_menu').offsetHeight + 'px';
-	}
+	document.getElementById('map').style.height = $(document).innerHeight() - document.getElementById('footer_id').offsetHeight - document.getElementById('nav_menu').offsetHeight + 'px';
 			
 	document.getElementById('site_info').setAttribute("style", "width:50%", "padding-bottom: 15px");
 	map.updateSize();
