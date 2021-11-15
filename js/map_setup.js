@@ -504,9 +504,16 @@ function close_details() {
 
 function show_site_details(json_address) {
 	site_info_var = true;
+	
 	document.getElementById('map').setAttribute("style", "width:50%");
-	document.getElementById('map').style.height = $(document).innerHeight() - document.getElementById('nav_menu').offsetHeight + 'px';
-				
+	
+	if (document.getElementById('footer_id')) {
+		document.getElementById('map').style.height = $(document).innerHeight() - document.getElementById('footer_id').offsetHeight - document.getElementById('nav_menu').offsetHeight + 'px';
+	}
+	else {
+		document.getElementById('map').style.height = $(document).innerHeight() - 25 - document.getElementById('nav_menu').offsetHeight + 'px';
+	}
+			
 	document.getElementById('site_info').setAttribute("style", "width:50%", "padding-bottom: 15px");
 	map.updateSize();
 
@@ -561,6 +568,7 @@ function render_info_box(url) {
 
 			vectorSource.clear();
 			hydrological_catchment_source.clear();
+			sampling_area_source.clear();
 			vectorSource.addFeature(selected_site);
 
 			$(document).keyup(function (e) {
@@ -568,6 +576,7 @@ function render_info_box(url) {
 					overlay.setPosition(undefined);
 					closer.blur();
 					vectorSource.clear();
+					sampling_area_source.clear();
 					hydrological_catchment_source.clear();
 				}
 			});
