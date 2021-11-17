@@ -220,6 +220,7 @@ closer.onclick = function () {
 
 var vectorSource = new ol.source.Vector({});
 var hydrological_catchment_source = new ol.source.Vector({});
+var equipment_location_source = new ol.source.Vector({});
 var sampling_area_source = new ol.source.Vector({});
 var point_layer = new ol.layer.Vector({
 	source: vectorSource,
@@ -238,6 +239,13 @@ var hydrological_catchment_layer = new ol.layer.Vector({
 var sampling_area_layer = new ol.layer.Vector({
 	source: sampling_area_source,
 	style: sampling_area_styles,
+	projection: 'EPSG:3857',
+	zIndex: '2'
+});
+
+var equipment_location_layer = new ol.layer.Vector({
+	source: equipment_location_source,
+	style: equipment_location_styles,
 	projection: 'EPSG:3857',
 	zIndex: '2'
 });
@@ -275,7 +283,8 @@ var osm = [
 	deimsWmsLayer,
 	point_layer,
 	hydrological_catchment_layer,
-	sampling_area_layer
+	sampling_area_layer,
+	equipment_location_layer
 ];
 
 var view = new ol.View({
@@ -499,6 +508,7 @@ function close_details() {
 	vectorSource.clear();
 	hydrological_catchment_source.clear();
 	sampling_area_source.clear();
+	equipment_location_source.clear();
 
 	$("#closer_button").remove();
 	site_info_var = false;
@@ -567,6 +577,7 @@ function render_info_box(url) {
 			vectorSource.clear();
 			hydrological_catchment_source.clear();
 			sampling_area_source.clear();
+			equipment_location_source.clear();
 			vectorSource.addFeature(selected_site);
 
 			$(document).keyup(function (e) {
@@ -576,6 +587,7 @@ function render_info_box(url) {
 					vectorSource.clear();
 					sampling_area_source.clear();
 					hydrological_catchment_source.clear();
+					equipment_location_source.clear();
 				}
 			});
 

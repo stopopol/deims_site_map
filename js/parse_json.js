@@ -258,6 +258,9 @@ function parse_json(json_address) {
 												case 'Sampling Area':
 													sampling_area_source.addFeature(feature);
 													break;
+												case 'Equipment Location':
+													equipment_location_source.addFeature(feature);
+													break;
 											}
 										}
 									}
