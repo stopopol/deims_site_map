@@ -54,7 +54,7 @@
 		});
 				
 		var blue_dashed_stroke = new ol.style.Stroke({
-		   color: '#336699',
+		   color: '##3399FF',
 		   width: 2,
 		   lineDash: [.1, 5] //or other combinations
 		});
