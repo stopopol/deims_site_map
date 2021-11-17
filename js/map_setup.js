@@ -148,6 +148,7 @@ $('#layers_selection').on('click', "li", function () {
 	
 	map.updateSize();
 	vectorSource.clear();
+	selected_site_source.clear();
 	overlay.setPosition(undefined);
 	closer.blur();
 	wmsSource.updateParams(params_obj);
@@ -213,16 +214,25 @@ var overlay = new ol.Overlay( /** @type {olx.OverlayOptions} */({
  */
 closer.onclick = function () {
 	vectorSource.clear();
+	selected_site_source.clear();
 	overlay.setPosition(undefined);
 	closer.blur();
 	return false;
 };
 
+var selected_site_source = new ol.source.Vector({});
 var vectorSource = new ol.source.Vector({});
 var hydrological_catchment_source = new ol.source.Vector({});
 var equipment_location_source = new ol.source.Vector({});
 var sampling_area_source = new ol.source.Vector({});
 var point_layer = new ol.layer.Vector({
+	source: selected_site_source,
+	style: styles,
+	projection: 'EPSG:3857',
+	zIndex: '5'
+});
+
+var boundaries_layer = new ol.layer.Vector({
 	source: vectorSource,
 	style: styles,
 	projection: 'EPSG:3857',
@@ -282,6 +292,7 @@ var osm = [
 	bgr,
 	deimsWmsLayer,
 	point_layer,
+	boundaries_layer,
 	hydrological_catchment_layer,
 	sampling_area_layer,
 	equipment_location_layer
@@ -423,9 +434,9 @@ function fill_autocomplete(wms_layer_name, awesomplete) {
 		awesomplete.list = site_names;
 
 	})
-		.fail(function () {
-			$.notify("Layer could not be loaded :(", "error");
-		});
+	.fail(function () {
+		$.notify("Layer could not be loaded :(", "error");
+	});
 
 }
 
@@ -506,6 +517,7 @@ function close_details() {
 
 	map.updateSize();
 	vectorSource.clear();
+	selected_site_source.clear();
 	hydrological_catchment_source.clear();
 	sampling_area_source.clear();
 	equipment_location_source.clear();
@@ -575,16 +587,18 @@ function render_info_box(url) {
 			});
 
 			vectorSource.clear();
+			selected_site_source.clear();
 			hydrological_catchment_source.clear();
 			sampling_area_source.clear();
 			equipment_location_source.clear();
-			vectorSource.addFeature(selected_site);
+			selected_site_source.addFeature(selected_site);
 
 			$(document).keyup(function (e) {
 				if (e.keyCode == 27 && typeof overlay.getPosition() !== 'undefined' && typeof overlay.getPosition() !== 'undefined') { // escape key maps to keycode `27`
 					overlay.setPosition(undefined);
 					closer.blur();
 					vectorSource.clear();
+					selected_site_source.clear();
 					sampling_area_source.clear();
 					hydrological_catchment_source.clear();
 					equipment_location_source.clear();
