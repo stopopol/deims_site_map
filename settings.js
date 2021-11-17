@@ -54,7 +54,7 @@
 		});
 				
 		var blue_dashed_stroke = new ol.style.Stroke({
-		   color: '##3399FF',
+		   color: '#3399FF',
 		   width: 2,
 		   lineDash: [.1, 5] //or other combinations
 		});
@@ -101,8 +101,8 @@
 	//	equipment_location_layer				
 		var grey_dashed_stroke = new ol.style.Stroke({
 		   color: '#808080',
-		   width: 2,
-		   lineDash: [.1, 5] //or other combinations
+		   width: 1,
+		   //lineDash: [.1, 5] //or other combinations
 		});
 				
 		var equipment_location_styles = [
