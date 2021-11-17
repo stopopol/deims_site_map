@@ -66,7 +66,18 @@
 		   })
 		];
 		
-	//	sampling_area_layer				
+	//	sampling_area_layer	
+		var white_cross = new ol.style.Style({
+          image: new ol.style.RegularShape({
+            //fill: fill,
+            stroke: white_stroke,
+            points: 4,
+            radius: 10,
+            radius2: 0,
+            angle: 0
+          })
+        });
+
 		var white_dashed_stroke = new ol.style.Stroke({
 		   color: '#FFFFFF',
 		   width: 2,
@@ -75,10 +86,14 @@
 				
 		var sampling_area_styles = [
 		   new ol.style.Style({
-			 image: new ol.style.Circle({
-			   stroke: white_stroke,
-			   radius: 3
-			 }),
+			 image: new ol.style.RegularShape({
+				//fill: fill,
+				stroke: white_stroke,
+				points: 4,
+				radius: 4,
+				radius2: 0,
+				angle: 0
+			  }),
 			 stroke: white_dashed_stroke,
 		   })
 		];	
@@ -98,4 +113,4 @@
 			 }),
 			 stroke: grey_dashed_stroke,
 		   })
-		];	
+		];
