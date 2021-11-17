@@ -29,6 +29,11 @@
 		   color: '#FFFFFF',
 		   width: 1.5
 		});
+		
+		var grey_stroke = new ol.style.Stroke({
+		   color: '#808080',
+		   width: 1.5
+		});
 				
 		var styles = [
 		   new ol.style.Style({
@@ -75,5 +80,22 @@
 			   radius: 3
 			 }),
 			 stroke: white_dashed_stroke,
+		   })
+		];	
+
+	//	equipment_location_layer				
+		var grey_dashed_stroke = new ol.style.Stroke({
+		   color: '#808080',
+		   width: 2,
+		   lineDash: [.1, 5] //or other combinations
+		});
+				
+		var equipment_location_styles = [
+		   new ol.style.Style({
+			 image: new ol.style.Circle({
+			   stroke: grey_stroke,
+			   radius: 3
+			 }),
+			 stroke: grey_dashed_stroke,
 		   })
 		];	
