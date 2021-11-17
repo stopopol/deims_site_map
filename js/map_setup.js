@@ -227,14 +227,14 @@ var equipment_location_source = new ol.source.Vector({});
 var sampling_area_source = new ol.source.Vector({});
 var point_layer = new ol.layer.Vector({
 	source: selected_site_source,
-	style: styles,
+	style: boundaries_styles,
 	projection: 'EPSG:3857',
 	zIndex: '5'
 });
 
 var boundaries_layer = new ol.layer.Vector({
 	source: vectorSource,
-	style: styles,
+	style: boundaries_styles,
 	projection: 'EPSG:3857',
 	zIndex: '1'
 });
