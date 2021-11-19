@@ -51,29 +51,40 @@ var blue_dashed_stroke = new ol.style.Stroke({
 	lineDash: [.1, 5] //or other combinations
 });
 
-var white_cross = new ol.style.Style({
-    image: new ol.style.RegularShape({
-        //fill: fill,
-        stroke: white_stroke,
-        points: 4,
-        radius: 10,
-        radius2: 0,
-        angle: 0
-    })
+var white_cross = new ol.style.RegularShape({
+	//fill: fill,
+	stroke: white_stroke,
+	points: 4,
+	radius: 4,
+	radius2: 0,
+	angle: 0
 });
+
+var grey_square = new ol.style.RegularShape({
+    //fill: fill,
+    stroke: grey_stroke,
+	radius: 4 / Math.SQRT2,
+	radius2: 4,
+	points: 4,
+	angle: 0,
+	scale: [1, 0.5],
+});
+
+var orange_point = new ol.style.Circle({
+	fill: orange_fill,
+	stroke: white_stroke,
+	radius: 5
+})
+
 
 // styles for layers
 // site boundaries and centroid/representative coordinates			
 var boundaries_styles = [
 	new ol.style.Style({
-		image: new ol.style.Circle({
-			fill: orange_fill,
-			stroke: white_stroke,
-			radius: 5
-		}),
+		image: orange_point,
 		fill: orange_fill,
 		stroke: white_stroke,
-		})
+	})
 ];
 			
 //	hydrological colour styles
@@ -86,25 +97,15 @@ var hydro_styles = [
 //	sampling_area_layer	
 var sampling_area_styles = [
 	new ol.style.Style({
-		image: new ol.style.RegularShape({
-			//fill: fill,
-			stroke: white_stroke,
-			points: 4,
-			radius: 4,
-			radius2: 0,
-			angle: 0
-		}),
+		image: white_cross,
 		stroke: white_dashed_stroke,
 	})
 ];	
 
 //	equipment_location_layer					
 var equipment_location_styles = [
-   new ol.style.Style({
-		image: new ol.style.Circle({
-			stroke: grey_stroke,
-			radius: 3
-		}),
+    new ol.style.Style({
+		image: grey_square,
 		stroke: grey_stroke,
-		})
+	})
 ];
