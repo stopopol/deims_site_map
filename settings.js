@@ -19,6 +19,9 @@ var wms_layer_name = "deims_all_sites";
 //var wms_layer_name = "lter_eu_formal";
 		
 wms_layer_name = geoserver_workspace + ":" + wms_layer_name;
+
+// object sizes
+var cross_size = 4;
 	
 //	colour styles
 var orange_fill = new ol.style.Fill({
@@ -54,28 +57,26 @@ var blue_dashed_stroke = new ol.style.Stroke({
 var white_cross = new ol.style.RegularShape({
 	//fill: fill,
 	stroke: white_stroke,
-	points: 4,
-	radius: 4,
+	points: cross_size,
+	radius: cross_size,
 	radius2: 0,
 	angle: 0
 });
 
-var grey_square = new ol.style.RegularShape({
+var grey_cross = new ol.style.RegularShape({
     //fill: fill,
     stroke: grey_stroke,
-	radius: 4 / Math.SQRT2,
-	radius2: 4,
-	points: 4,
-	angle: 0,
-	scale: [1, 0.5],
+	points: cross_size,
+	radius: cross_size,
+	radius2: 0,
+	angle: 0
 });
 
 var orange_point = new ol.style.Circle({
 	fill: orange_fill,
 	stroke: white_stroke,
 	radius: 5
-})
-
+});
 
 // styles for layers
 // site boundaries and centroid/representative coordinates			
@@ -105,7 +106,7 @@ var sampling_area_styles = [
 //	equipment_location_layer					
 var equipment_location_styles = [
     new ol.style.Style({
-		image: grey_square,
+		image: grey_cross,
 		stroke: grey_stroke,
 	})
 ];
