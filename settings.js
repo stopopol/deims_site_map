@@ -22,6 +22,7 @@ wms_layer_name = geoserver_workspace + ":" + wms_layer_name;
 
 // object sizes
 var cross_size = 4;
+var stroke_width = 2;
 	
 //	colour styles
 var orange_fill = new ol.style.Fill({
@@ -34,23 +35,23 @@ var blue_fill = new ol.style.Fill({
 				
 var white_stroke = new ol.style.Stroke({
 	color: '#FFFFFF',
-	width: 1.5
+	width: stroke_width
 });
 		
 var grey_stroke = new ol.style.Stroke({
 	color: '#303030',
-	width: 2
+	width: stroke_width
 });
 
 var white_dashed_stroke = new ol.style.Stroke({
 	color: '#FFFFFF',
-	width: 2,
+	width: stroke_width,
 	lineDash: [.1, 5] //or other combinations
 });	
 
 var blue_dashed_stroke = new ol.style.Stroke({
 	color: '#3399FF',
-	width: 2,
+	width: stroke_width,
 	lineDash: [.1, 5] //or other combinations
 });
 
