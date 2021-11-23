@@ -38,8 +38,8 @@ var white_stroke = new ol.style.Stroke({
 });
 		
 var grey_stroke = new ol.style.Stroke({
-	color: '#808080',
-	width: 1
+	color: '#303030',
+	width: 2
 });
 
 var white_dashed_stroke = new ol.style.Stroke({
