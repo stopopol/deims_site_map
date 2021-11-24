@@ -207,6 +207,11 @@
 	text-decoration: none;
 }
 
+.no_underline_hover:hover {
+	text-decoration: none;
+	color: rgba(0,0,0,.7);
+}
+
 #nav_menu {
     background-color: #ffffff !important;
 }
@@ -242,21 +247,21 @@
 .dropdown-content {
   display: none;
   position: absolute;
-  background-color: #f1f1f1;
+  border-radius: 4px;
+  background-color: #ffffff;
   min-width: 160px;
   z-index: 1;
+  border-style: solid;
+  border-width: 1px;
+  border-color: rgba(0,0,0,.55);
 }
 
 /* Links inside the dropdown */
 .dropdown-content a {
-  color: black;
   padding: 12px 16px;
   text-decoration: none;
   display: block;
 }
-
-/* Change color of dropdown links on hover */
-.dropdown-content a:hover {background-color: #ddd;}
 
 /* Show the dropdown menu on hover */
 .dropdown:hover .dropdown-content {display: block;}
