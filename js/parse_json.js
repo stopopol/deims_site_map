@@ -237,6 +237,7 @@ function parse_json(json_address) {
 			// if there are related locations, check for hydrological catchment
 			if (related_locations) {
 
+					$('#legend_locations_container').css("visibility", "visible");
 				    var f = (function(){
 		
 						var xhr = [], i;
@@ -305,7 +306,7 @@ function parse_json(json_address) {
 			var zoom_extent = zoom_polygon.getExtent();
 					
 			view.fit(zoom_extent, {duration: 1000, padding: [50, 50, 50, 50]});
-			$('#legend_locations_container').css("visibility", "visible");
+			
 				
 		} 
 		
