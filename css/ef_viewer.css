@@ -276,3 +276,8 @@
 #loc_type_hydro, #loc_type_sampling, #loc_type_equipment {
 	visibility: hidden;
 }
+
+/* autocomplete list must be on top of all other elements */
+#awesomplete_list_1 {
+	z-index: 10;
+}
