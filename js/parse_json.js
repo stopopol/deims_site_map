@@ -222,7 +222,10 @@ function parse_json(json_address) {
 			sidebar_object_dom.innerHTML += "<br>";
 
 			var site_boundaries = jsonObj["attributes"]["geographic"]["boundaries"];
-	
+			
+			// turn location layer switcher invisible
+			location_layers_invisible();
+		
 			// if there is no boundary information available
 			if (!site_boundaries) {
 				$.notify("There is no boundary information available for this site :(", "info");
@@ -233,8 +236,9 @@ function parse_json(json_address) {
 			var related_locations = jsonObj["attributes"]["geographic"]["relatedLocations"];
 			// if there are related locations, check for hydrological catchment
 			if (related_locations) {
-				
+
 				    var f = (function(){
+		
 						var xhr = [], i;
 						for(i = 0; i < related_locations.length; i++){ //for loop
 							(function(i){
@@ -254,21 +258,32 @@ function parse_json(json_address) {
 											switch (location_json['properties']['locationType']['label']) {
 												case 'Hydrological Catchment':
 													hydrological_catchment_source.addFeature(feature);
+													$('#loc_type_hydro').css("visibility", "visible");
+													$('#loc_type_hydro').css("display", "block");
 													break;
 												case 'Sampling Area':
 													sampling_area_source.addFeature(feature);
+													$('#loc_type_sampling').css("visibility", "visible");
+													$('#loc_type_sampling').css("display", "block");
 													break;
 												case 'Equipment Location':
 													equipment_location_source.addFeature(feature);
+													$('#loc_type_equipment').css("visibility", "visible");
+													$('#loc_type_equipment').css("display", "block");
 													break;
 											}
 										}
+										
 									}
+									
 								};
+								
 								xhr[i].send();
 							})(i);
 						}
 					})();
+
+					
 			}
 				
 			// this part reads the geometry from the record and adds it to the map;
@@ -290,6 +305,7 @@ function parse_json(json_address) {
 			var zoom_extent = zoom_polygon.getExtent();
 					
 			view.fit(zoom_extent, {duration: 1000, padding: [50, 50, 50, 50]});
+			$('#legend_locations_container').css("visibility", "visible");
 				
 		} 
 		
