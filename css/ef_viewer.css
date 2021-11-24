@@ -166,6 +166,14 @@
 	text-align: center;
 }
 
+#legend_locations_container {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+	z-index: 6; /* Sit on top */
+	visibility: hidden;
+}
+
 .no_underline_link {
     text-decoration: none;
 }
@@ -206,4 +214,59 @@
 #deims_logo {
     padding: .5rem 1rem;
     padding-left: 0px;
+}
+
+
+/* layer selector css */
+/* Dropdown Button */
+.dropbtn {
+  background-color: rgba(0,60,136,.5);
+  border-radius: 4px;
+  color: white;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size: 16px;
+  border-width: 4px;
+  border-color: rgba(255,255,255,.4);
+  border-radius: 4px;
+  background-clip: padding-box;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #ddd;}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {display: block;}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {
+	background-color: rgba(0,60,136,.7);
+	border-color: rgba(255,255,255,.6);
+}
+
+#loc_type_hydro, #loc_type_sampling, #loc_type_equipment {
+	visibility: hidden;
 }
