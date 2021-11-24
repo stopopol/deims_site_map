@@ -521,10 +521,21 @@ function close_details() {
 	hydrological_catchment_source.clear();
 	sampling_area_source.clear();
 	equipment_location_source.clear();
+	location_layers_invisible();
 
 	$("#closer_button").remove();
 	site_info_var = false;
 
+}
+
+function location_layers_invisible () {
+	$('#legend_locations_container').css("visibility", "hidden");
+	$('#loc_type_hydro').css("visibility", "hidden");
+	$('#loc_type_hydro').css("display", "none");
+	$('#loc_type_sampling').css("visibility", "hidden");
+	$('#loc_type_sampling').css("display", "none");
+	$('#loc_type_equipment').css("visibility", "hidden");
+	$('#loc_type_equipment').css("display", "none");
 }
 
 function show_site_details(json_address) {
