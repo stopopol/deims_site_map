@@ -107,8 +107,7 @@ function parse_json(json_address) {
 				}
 	
 			}
-
-					
+	
 			// responsibleParty
 			if (jsonObj["attributes"]["contact"]["siteManager"] != null) {
 				sidebar_object_dom.innerHTML += '<br><b>responsibleParties:</b><br>';
@@ -234,10 +233,8 @@ function parse_json(json_address) {
 			
 			// add related locations
 			var related_locations = jsonObj["attributes"]["geographic"]["relatedLocations"];
-			// if there are related locations, check for hydrological catchment
 			if (related_locations) {
 
-					$('#legend_locations_container').css("visibility", "visible");
 				    var f = (function(){
 		
 						var xhr = [], i;
@@ -259,19 +256,23 @@ function parse_json(json_address) {
 											switch (location_json['properties']['locationType']['label']) {
 												case 'Hydrological Catchment':
 													hydrological_catchment_source.addFeature(feature);
+													$('#legend_locations_container').css("visibility", "visible");
 													$('#loc_type_hydro').css("visibility", "visible");
 													$('#loc_type_hydro').css("display", "block");
 													break;
 												case 'Sampling Area':
 													sampling_area_source.addFeature(feature);
+													$('#legend_locations_container').css("visibility", "visible");
 													$('#loc_type_sampling').css("visibility", "visible");
 													$('#loc_type_sampling').css("display", "block");
 													break;
 												case 'Equipment Location':
 													equipment_location_source.addFeature(feature);
+													$('#legend_locations_container').css("visibility", "visible");
 													$('#loc_type_equipment').css("visibility", "visible");
 													$('#loc_type_equipment').css("display", "block");
 													break;
+													
 											}
 										}
 										
