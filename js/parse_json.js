@@ -238,7 +238,7 @@ function parse_json(json_address) {
 				    var f = (function(){
 		
 						var xhr = [], i;
-						for(i = 0; i < related_locations.length; i++){ //for loop
+						for (i = 0; i < related_locations.length; i++) { //for loop
 							(function(i){
 								xhr[i] = new XMLHttpRequest();
 								url = "https://deims.org/api/locations/" + related_locations[i]['id']['suffix'];
@@ -271,6 +271,12 @@ function parse_json(json_address) {
 													$('#legend_locations_container').css("visibility", "visible");
 													$('#loc_type_equipment').css("visibility", "visible");
 													$('#loc_type_equipment').css("display", "block");
+													break;
+												case 'e-shape':
+													eshape_source.addFeature(feature);
+													$('#legend_locations_container').css("visibility", "visible");
+													$('#loc_type_eshape').css("visibility", "visible");
+													$('#loc_type_eshape').css("display", "block");
 													break;
 													
 											}
