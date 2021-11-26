@@ -43,6 +43,11 @@ var grey_stroke = new ol.style.Stroke({
 	width: stroke_width
 });
 
+var pinkish_stroke = new ol.style.Stroke({
+	color: '#cc0066',
+	width: stroke_width
+});
+
 var white_dashed_stroke = new ol.style.Stroke({
 	color: '#FFFFFF',
 	width: stroke_width,
@@ -109,5 +114,12 @@ var equipment_location_styles = [
     new ol.style.Style({
 		image: grey_cross,
 		stroke: grey_stroke,
+	})
+];
+
+//	eshape_location_layer					
+var eshape_location_styles = [
+    new ol.style.Style({
+		stroke: pinkish_stroke,
 	})
 ];
