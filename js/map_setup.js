@@ -7,6 +7,9 @@
 
 var site_info_var = false;
 var bio_geo_check_var = false;
+var sampling_check_var = true;
+var equipment_check_var = true;
+var hydrological_catchment_check_var = false;
 
 // site names and coordinates
 var site_names = [];
@@ -157,7 +160,43 @@ $('#layers_selection').on('click', "li", function () {
 
 });
 
-// Listener for BiogeographicalRegions_LAEA/MapServer/WMSServer		
+// Listener for Sampling Area layer	
+$("#sampling_checkbox").change(function () {
+	if (sampling_check_var == false) {
+		sampling_area_layer.setVisible(true);
+		sampling_check_var = true;
+	} else {
+		// turn off legend
+		sampling_area_layer.setVisible(false);
+		sampling_check_var = false;
+	}
+});
+
+// Listener for Sampling Area layer	
+$("#equipment_checkbox").change(function () {
+	if (equipment_check_var == false) {
+		equipment_location_layer.setVisible(true);
+		equipment_check_var = true;
+	} else {
+		// turn off legend
+		equipment_location_layer.setVisible(false);
+		equipment_check_var = false;
+	}
+});
+
+// Listener for Hydrological catchment layer	
+$("#hydro_checkbox").change(function () {
+	if (hydrological_catchment_check_var == false) {
+		hydrological_catchment_layer.setVisible(true);
+		hydrological_catchment_check_var = true;
+	} else {
+		// turn off legend
+		hydrological_catchment_layer.setVisible(false);
+		hydrological_catchment_check_var = false;
+	}
+});
+
+// Listener for BioRegions/BiogeographicalRegions_LAEA/MapServer/WMSServer layer		
 $("#biogeo_europe").change(function () {
 	if (bio_geo_check_var == false) {
 		bgr.setVisible(true);
@@ -243,7 +282,8 @@ var hydrological_catchment_layer = new ol.layer.Vector({
 	source: hydrological_catchment_source,
 	style: hydro_styles,
 	projection: 'EPSG:3857',
-	zIndex: '2'
+	zIndex: '2',
+	visible: false
 });
 
 var sampling_area_layer = new ol.layer.Vector({
