@@ -10,6 +10,7 @@ var bio_geo_check_var = false;
 var sampling_check_var = true;
 var equipment_check_var = true;
 var hydrological_catchment_check_var = false;
+var eshape_check_var = false;
 
 // site names and coordinates
 var site_names = [];
@@ -196,6 +197,18 @@ $("#hydro_checkbox").change(function () {
 	}
 });
 
+// Listener for e-shape layer	
+$("#eshape_checkbox").change(function () {
+	if (eshape_check_var == false) {
+		eshape_layer.setVisible(true);
+		eshape_check_var = true;
+	} else {
+		// turn off legend
+		eshape_layer.setVisible(false);
+		eshape_check_var = false;
+	}
+});
+
 // Listener for BioRegions/BiogeographicalRegions_LAEA/MapServer/WMSServer layer		
 $("#biogeo_europe").change(function () {
 	if (bio_geo_check_var == false) {
@@ -264,6 +277,7 @@ var vectorSource = new ol.source.Vector({});
 var hydrological_catchment_source = new ol.source.Vector({});
 var equipment_location_source = new ol.source.Vector({});
 var sampling_area_source = new ol.source.Vector({});
+var eshape_source = new ol.source.Vector({});
 var point_layer = new ol.layer.Vector({
 	source: selected_site_source,
 	style: boundaries_styles,
@@ -281,6 +295,14 @@ var boundaries_layer = new ol.layer.Vector({
 var hydrological_catchment_layer = new ol.layer.Vector({
 	source: hydrological_catchment_source,
 	style: hydro_styles,
+	projection: 'EPSG:3857',
+	zIndex: '2',
+	visible: false
+});
+
+var eshape_layer = new ol.layer.Vector({
+	source: eshape_source,
+	style: eshape_location_styles,
 	projection: 'EPSG:3857',
 	zIndex: '2',
 	visible: false
@@ -335,7 +357,8 @@ var osm = [
 	boundaries_layer,
 	hydrological_catchment_layer,
 	sampling_area_layer,
-	equipment_location_layer
+	equipment_location_layer,
+	eshape_layer
 ];
 
 var view = new ol.View({
@@ -561,6 +584,7 @@ function close_details() {
 	hydrological_catchment_source.clear();
 	sampling_area_source.clear();
 	equipment_location_source.clear();
+	eshape_source.clear();
 	location_layers_invisible();
 
 	$("#closer_button").remove();
@@ -576,6 +600,8 @@ function location_layers_invisible () {
 	$('#loc_type_sampling').css("display", "none");
 	$('#loc_type_equipment').css("visibility", "hidden");
 	$('#loc_type_equipment').css("display", "none");
+	$('#loc_type_eshape').css("visibility", "hidden");
+	$('#loc_type_eshape').css("display", "none");
 }
 
 function show_site_details(json_address) {
@@ -642,6 +668,7 @@ function render_info_box(url) {
 			hydrological_catchment_source.clear();
 			sampling_area_source.clear();
 			equipment_location_source.clear();
+			eshape_source.clear();
 			selected_site_source.addFeature(selected_site);
 
 			$(document).keyup(function (e) {
