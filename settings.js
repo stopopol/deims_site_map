@@ -23,7 +23,8 @@ wms_layer_name = geoserver_workspace + ":" + wms_layer_name;
 // object sizes
 var cross_size = 4;
 var stroke_width = 2;
-	
+var style_zindex = 1;
+
 //	colour styles
 var orange_fill = new ol.style.Fill({
 	color: 'rgba(255,153,51,0.75)'
@@ -32,14 +33,38 @@ var orange_fill = new ol.style.Fill({
 var blue_fill = new ol.style.Fill({
 	color: 'rgba(44, 130, 201,0.75)'
 });
-				
+
+var green_fill = new ol.style.Fill({
+	color: '#336600'
+});
+
+var grey_fill = new ol.style.Fill({
+	color: '#999999'
+});
+
 var white_stroke = new ol.style.Stroke({
 	color: '#FFFFFF',
 	width: stroke_width
 });
-		
+
+var thin_white_stroke = new ol.style.Stroke({
+	color: '#FFFFFF',
+	width: stroke_width-1
+});
+
+var white_border_stroke = new ol.style.Stroke({
+	color: '#FFFFFF',
+	width: stroke_width+1.5,
+	zIndex: style_zindex-1,
+});
+
 var grey_stroke = new ol.style.Stroke({
-	color: '#303030',
+	color: '#999999',
+	width: stroke_width
+});
+
+var green_stroke = new ol.style.Stroke({
+	color: '#336600',
 	width: stroke_width
 });
 
@@ -48,40 +73,28 @@ var pinkish_stroke = new ol.style.Stroke({
 	width: stroke_width
 });
 
-var white_dashed_stroke = new ol.style.Stroke({
-	color: '#FFFFFF',
-	width: stroke_width,
-	lineDash: [.1, 5] //or other combinations
-});	
-
 var blue_dashed_stroke = new ol.style.Stroke({
 	color: '#3399FF',
 	width: stroke_width,
-	lineDash: [.1, 5] //or other combinations
-});
-
-var white_cross = new ol.style.RegularShape({
-	//fill: fill,
-	stroke: white_stroke,
-	points: cross_size,
-	radius: cross_size,
-	radius2: 0,
-	angle: 0
-});
-
-var grey_cross = new ol.style.RegularShape({
-    //fill: fill,
-    stroke: grey_stroke,
-	points: cross_size,
-	radius: cross_size,
-	radius2: 0,
-	angle: 0
+	lineDash: [3, 5] //or other combinations
 });
 
 var orange_point = new ol.style.Circle({
 	fill: orange_fill,
 	stroke: white_stroke,
 	radius: 5
+});
+
+var green_point = new ol.style.Circle({
+	fill: green_fill,
+	stroke: thin_white_stroke,
+	radius: 3
+});
+
+var grey_point = new ol.style.Circle({
+	fill: grey_fill,
+	stroke: thin_white_stroke,
+	radius: 3
 });
 
 // styles for layers
@@ -97,6 +110,9 @@ var boundaries_styles = [
 //	hydrological colour styles
 var hydro_styles = [
 	new ol.style.Style({
+		stroke: white_border_stroke
+    }),
+	new ol.style.Style({
 		stroke: blue_dashed_stroke,
 	})
 ];
@@ -104,22 +120,32 @@ var hydro_styles = [
 //	sampling_area_layer	
 var sampling_area_styles = [
 	new ol.style.Style({
-		image: white_cross,
-		stroke: white_dashed_stroke,
-	})
+		stroke: white_border_stroke,
+    }),
+	new ol.style.Style({
+		image: green_point,
+		stroke: green_stroke,
+	}),
 ];	
 
 //	equipment_location_layer					
 var equipment_location_styles = [
+	new ol.style.Style({
+		stroke: white_border_stroke,
+    }),
     new ol.style.Style({
-		image: grey_cross,
-		stroke: grey_stroke,
-	})
+		image: grey_point,
+		stroke: grey_stroke
+    }),
+	
 ];
 
 //	eshape_location_layer					
 var eshape_location_styles = [
     new ol.style.Style({
+		stroke: white_border_stroke
+    }),
+	new ol.style.Style({
 		stroke: pinkish_stroke,
-	})
+	}),
 ];
