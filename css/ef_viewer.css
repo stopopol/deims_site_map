@@ -295,20 +295,14 @@
 /* Legend for location layer switcher */
 
 #loc_type_sampling:after {
-	color: #996633;
-    content: " — — —";
+	color: #336600;
+    content: " ―――";
 	font-weight: bold;
 }
 
 #loc_type_hydro:after {
 	color: #3399FF;
     content: " — — —";
-	font-weight: bold;
-}
-
-#loc_type_sampling:after {
-	color: #336600;
-    content: " ———";
 	font-weight: bold;
 }
 
