@@ -774,6 +774,10 @@ function render_info_box(url) {
 			sampling_area_source.clear();
 			equipment_location_source.clear();
 			eshape_source.clear();
+			socio_ecological_source();
+			model_area_location_styles();
+			airshed_source.clear();
+			other_locations_source.clear();
 			selected_site_source.addFeature(selected_site);
 
 			$(document).keyup(function (e) {
@@ -785,6 +789,10 @@ function render_info_box(url) {
 					sampling_area_source.clear();
 					hydrological_catchment_source.clear();
 					equipment_location_source.clear();
+					socio_ecological_source();
+					model_area_location_styles();
+					airshed_source.clear();
+					other_locations_source.clear();
 				}
 			});
 
