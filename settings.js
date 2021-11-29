@@ -70,7 +70,8 @@ var green_stroke = new ol.style.Stroke({
 
 var pinkish_stroke = new ol.style.Stroke({
 	color: '#cc0066',
-	width: stroke_width
+	width: stroke_width,
+	lineDash: [3, 5]
 });
 
 var blue_dashed_stroke = new ol.style.Stroke({
