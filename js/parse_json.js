@@ -246,12 +246,12 @@ function parse_json(json_address) {
 								xhr[i].onreadystatechange = function(){
 									if (xhr[i].readyState === 4 && xhr[i].status === 200){
 										var location_json = JSON.parse(xhr[i].responseText);
-										if (location_json['properties']['locationType']) {
-											var format = new ol.format.GeoJSON();
+										var format = new ol.format.GeoJSON();
 											var feature = format.readFeature(location_json, {
 												dataProjection: 'EPSG:4326',
 												featureProjection: 'EPSG:3857'
 											});
+										if (location_json['properties']['locationType']) {
 											// add related locations
 											switch (location_json['properties']['locationType']['label']) {
 												case 'Hydrological Catchment':
@@ -278,8 +278,43 @@ function parse_json(json_address) {
 													$('#loc_type_eshape').css("visibility", "visible");
 													$('#loc_type_eshape').css("display", "block");
 													break;
-													
+												case 'e-shape':
+													eshape_source.addFeature(feature);
+													$('#legend_locations_container').css("visibility", "visible");
+													$('#loc_type_eshape').css("visibility", "visible");
+													$('#loc_type_eshape').css("display", "block");
+													break;
+												case 'Air Shed':
+													airshed_source.addFeature(feature);
+													$('#legend_locations_container').css("visibility", "visible");
+													$('#loc_type_airshed').css("visibility", "visible");
+													$('#loc_type_airshed').css("display", "block");
+													break;
+												case 'Model Area':
+													model_area_source.addFeature(feature);
+													$('#legend_locations_container').css("visibility", "visible");
+													$('#loc_type_model').css("visibility", "visible");
+													$('#loc_type_model').css("display", "block");
+													break;	
+												case 'Socio-ecological reference area':
+													socio_ecological_source.addFeature(feature);
+													$('#legend_locations_container').css("visibility", "visible");
+													$('#loc_type_socioecological').css("visibility", "visible");
+													$('#loc_type_socioecological').css("display", "block");
+													break;
+												case 'not applicable':
+													other_locations_source.addFeature(feature);
+													$('#legend_locations_container').css("visibility", "visible");
+													$('#loc_type_other').css("visibility", "visible");
+													$('#loc_type_other').css("display", "block");
+													break;
 											}
+										}
+										else {
+											other_locations_source.addFeature(feature);
+											$('#legend_locations_container').css("visibility", "visible");
+											$('#loc_type_other').css("visibility", "visible");
+											$('#loc_type_other').css("display", "block");
 										}
 										
 									}
