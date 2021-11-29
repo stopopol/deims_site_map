@@ -664,6 +664,19 @@ map.on('singleclick', function (evt) {
 	}
 });
 
+function clear_all_vector_sources() {
+	vectorSource.clear();
+	selected_site_source.clear();
+	hydrological_catchment_source.clear();
+	sampling_area_source.clear();
+	equipment_location_source.clear();
+	eshape_source.clear();
+	socio_ecological_source.clear();
+	model_area_source.clear();
+	airshed_source.clear();
+	other_locations_source.clear();
+}
+
 function close_details() {
 	document.getElementById('map').style.width = "100%";
 	document.getElementById('site_info').style.height = "0px";
@@ -671,17 +684,7 @@ function close_details() {
 	document.getElementById('closer').innerHTML = "";
 
 	map.updateSize();
-	vectorSource.clear();
-	selected_site_source.clear();
-	hydrological_catchment_source.clear();
-	sampling_area_source.clear();
-	equipment_location_source.clear();
-	eshape_source.clear();
-	socio_ecological_source();
-	model_area_location_styles();
-	airshed_source.clear();
-	other_locations_source.clear();
-	
+	clear_all_vector_sources();
 	$('#legend_locations_container').css("visibility", "hidden");
 	location_layers_invisible();
 
@@ -768,31 +771,14 @@ function render_info_box(url) {
 				geometry: new ol.geom.Point(current_coords),
 			});
 
-			vectorSource.clear();
-			selected_site_source.clear();
-			hydrological_catchment_source.clear();
-			sampling_area_source.clear();
-			equipment_location_source.clear();
-			eshape_source.clear();
-			socio_ecological_source();
-			model_area_location_styles();
-			airshed_source.clear();
-			other_locations_source.clear();
+			clear_all_vector_sources();
 			selected_site_source.addFeature(selected_site);
 
 			$(document).keyup(function (e) {
 				if (e.keyCode == 27 && typeof overlay.getPosition() !== 'undefined' && typeof overlay.getPosition() !== 'undefined') { // escape key maps to keycode `27`
 					overlay.setPosition(undefined);
 					closer.blur();
-					vectorSource.clear();
-					selected_site_source.clear();
-					sampling_area_source.clear();
-					hydrological_catchment_source.clear();
-					equipment_location_source.clear();
-					socio_ecological_source();
-					model_area_location_styles();
-					airshed_source.clear();
-					other_locations_source.clear();
+					clear_all_vector_sources();
 				}
 			});
 
