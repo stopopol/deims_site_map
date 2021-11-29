@@ -291,7 +291,9 @@ function parse_json(json_address) {
 						}
 					})();
 
-					
+			}
+			else {
+				$('#legend_locations_container').css("visibility", "hidden");
 			}
 				
 			// this part reads the geometry from the record and adds it to the map;
