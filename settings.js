@@ -42,6 +42,10 @@ var grey_fill = new ol.style.Fill({
 	color: '#999999'
 });
 
+var brown_fill = new ol.style.Fill({
+	color: '#996633'
+});
+
 var white_stroke = new ol.style.Stroke({
 	color: '#FFFFFF',
 	width: stroke_width
@@ -74,6 +78,31 @@ var pinkish_stroke = new ol.style.Stroke({
 	lineDash: [3, 5]
 });
 
+var blueish_stroke = new ol.style.Stroke({
+	color: '#666699',
+	width: stroke_width,
+	lineDash: [3, 5]
+});
+
+var airshed_blue_stroke = new ol.style.Stroke({
+	color: '#6699cc',
+	width: stroke_width,
+	lineDash: [3, 5]
+});
+
+
+var redish_stroke = new ol.style.Stroke({
+	color: '#cc3333',
+	width: stroke_width,
+	lineDash: [3, 5]
+});
+
+var brown_stroke = new ol.style.Stroke({
+	color: '#996633',
+	width: stroke_width,
+	lineDash: [3, 5]
+});
+
 var blue_dashed_stroke = new ol.style.Stroke({
 	color: '#3399FF',
 	width: stroke_width,
@@ -94,6 +123,12 @@ var green_point = new ol.style.Circle({
 
 var grey_point = new ol.style.Circle({
 	fill: grey_fill,
+	stroke: thin_white_stroke,
+	radius: 3
+});
+
+var brown_point = new ol.style.Circle({
+	fill: brown_fill,
 	stroke: thin_white_stroke,
 	radius: 3
 });
@@ -148,5 +183,46 @@ var eshape_location_styles = [
     }),
 	new ol.style.Style({
 		stroke: pinkish_stroke,
+	}),
+];
+
+//	model_area_location_layer					
+var model_area_location_styles = [
+    new ol.style.Style({
+		stroke: white_border_stroke
+    }),
+	new ol.style.Style({
+		stroke: blueish_stroke,
+	}),
+];
+
+//	socio_ecological_location_layer					
+var socio_ecological_location_styles = [
+    new ol.style.Style({
+		stroke: white_border_stroke
+    }),
+	new ol.style.Style({
+		stroke: redish_stroke,
+	}),
+];
+
+//	airshed_location_layer					
+var airshed_location_styles = [
+    new ol.style.Style({
+		stroke: white_border_stroke
+    }),
+	new ol.style.Style({
+		stroke: airshed_blue_stroke,
+	}),
+];
+
+//	other_location_layer					
+var other_location_styles = [
+    new ol.style.Style({
+		stroke: white_border_stroke
+    }),
+	new ol.style.Style({
+		stroke: brown_stroke,
+		image: brown_point
 	}),
 ];
