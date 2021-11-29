@@ -585,6 +585,7 @@ function close_details() {
 	sampling_area_source.clear();
 	equipment_location_source.clear();
 	eshape_source.clear();
+	$('#legend_locations_container').css("visibility", "hidden");
 	location_layers_invisible();
 
 	$("#closer_button").remove();
@@ -593,7 +594,6 @@ function close_details() {
 }
 
 function location_layers_invisible () {
-	$('#legend_locations_container').css("visibility", "hidden");
 	$('#loc_type_hydro').css("visibility", "hidden");
 	$('#loc_type_hydro').css("display", "none");
 	$('#loc_type_sampling').css("visibility", "hidden");
