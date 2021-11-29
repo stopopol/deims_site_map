@@ -677,6 +677,11 @@ function close_details() {
 	sampling_area_source.clear();
 	equipment_location_source.clear();
 	eshape_source.clear();
+	socio_ecological_source();
+	model_area_location_styles();
+	airshed_source.clear();
+	other_locations_source.clear();
+	
 	$('#legend_locations_container').css("visibility", "hidden");
 	location_layers_invisible();
 
