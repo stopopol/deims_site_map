@@ -11,6 +11,10 @@ var sampling_check_var = true;
 var equipment_check_var = true;
 var hydrological_catchment_check_var = false;
 var eshape_check_var = false;
+var model_area_check_var = false;
+var airshed_check_var = false;
+var socio_ecological_check_var = false;
+var other_location_check_var = false;
 
 // site names and coordinates
 var site_names = [];
@@ -209,6 +213,54 @@ $("#eshape_checkbox").change(function () {
 	}
 });
 
+// Listener for model area layer	
+$("#loc_type_model").change(function () {
+	if (model_area_check_var == false) {
+		model_area_location_layer.setVisible(true);
+		model_area_check_var = true;
+	} else {
+		// turn off legend
+		model_area_location_layer.setVisible(false);
+		model_area_check_var = false;
+	}
+});
+
+// Listener for socio-ecological layer	
+$("#loc_type_socioecological").change(function () {
+	if (socio_ecological_check_var == false) {
+		socio_ecological_location_layer.setVisible(true);
+		socio_ecological_check_var = true;
+	} else {
+		// turn off legend
+		socio_ecological_location_layer.setVisible(false);
+		socio_ecological_check_var = false;
+	}
+});
+
+// Listener for airshed layer
+$("#loc_type_airshed").change(function () {
+	if (airshed_check_var == false) {
+		airshed_location_layer.setVisible(true);
+		airshed_check_var = true;
+	} else {
+		// turn off legend
+		airshed_location_layer.setVisible(false);
+		airshed_check_var = false;
+	}
+});
+
+// Listener for airshed layer
+$("#loc_type_other").change(function () {
+	if (other_location_check_var == false) {
+		other_location_layer.setVisible(true);
+		other_location_check_var = true;
+	} else {
+		// turn off legend
+		other_location_layer.setVisible(false);
+		other_location_check_var = false;
+	}
+});
+
 // Listener for BioRegions/BiogeographicalRegions_LAEA/MapServer/WMSServer layer		
 $("#biogeo_europe").change(function () {
 	if (bio_geo_check_var == false) {
@@ -278,6 +330,10 @@ var hydrological_catchment_source = new ol.source.Vector({});
 var equipment_location_source = new ol.source.Vector({});
 var sampling_area_source = new ol.source.Vector({});
 var eshape_source = new ol.source.Vector({});
+var model_area_source = new ol.source.Vector({});
+var socio_ecological_source = new ol.source.Vector({});
+var airshed_source = new ol.source.Vector({});
+var other_locations_source = new ol.source.Vector({});
 var point_layer = new ol.layer.Vector({
 	source: selected_site_source,
 	style: boundaries_styles,
@@ -322,6 +378,38 @@ var equipment_location_layer = new ol.layer.Vector({
 	zIndex: '2'
 });
 
+var model_area_location_layer = new ol.layer.Vector({
+	source: model_area_source,
+	style: model_area_location_styles,
+	projection: 'EPSG:3857',
+	zIndex: '2',
+	visible: false
+});
+
+var socio_ecological_location_layer = new ol.layer.Vector({
+	source: socio_ecological_source,
+	style: socio_ecological_location_styles,
+	projection: 'EPSG:3857',
+	zIndex: '2',
+	visible: false
+});
+
+var airshed_location_layer = new ol.layer.Vector({
+	source: airshed_source,
+	style: airshed_location_styles,
+	projection: 'EPSG:3857',
+	zIndex: '2',
+	visible: false
+});
+
+var other_location_layer = new ol.layer.Vector({
+	source: other_locations_source,
+	style: other_location_styles,
+	projection: 'EPSG:3857',
+	zIndex: '2',
+	visible: false
+});
+
 // here could change the layer to queried, add a cql filter, etc. 
 var wmsSource = new ol.source.TileWMS({
 	url: geoserver_getcapabilities_url + geoserver_workspace + '/wms?',
@@ -358,7 +446,11 @@ var osm = [
 	hydrological_catchment_layer,
 	sampling_area_layer,
 	equipment_location_layer,
-	eshape_layer
+	eshape_layer,
+	model_area_location_layer,
+	socio_ecological_location_layer,
+	airshed_location_layer,
+	other_location_layer
 ];
 
 var view = new ol.View({
@@ -602,6 +694,14 @@ function location_layers_invisible () {
 	$('#loc_type_equipment').css("display", "none");
 	$('#loc_type_eshape').css("visibility", "hidden");
 	$('#loc_type_eshape').css("display", "none");
+	$('#loc_type_socioecological').css("visibility", "hidden");
+	$('#loc_type_socioecological').css("display", "none");
+	$('#loc_type_model').css("visibility", "hidden");
+	$('#loc_type_model').css("display", "none");
+	$('#loc_type_other').css("visibility", "hidden");
+	$('#loc_type_other').css("display", "none");	
+	$('#loc_type_airshed').css("visibility", "hidden");
+	$('#loc_type_airshed').css("display", "none");	
 }
 
 function show_site_details(json_address) {
