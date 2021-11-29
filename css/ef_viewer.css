@@ -291,3 +291,59 @@
 #awesomplete_list_1 {
 	z-index: 10;
 }
+
+/* Legend for location layer switcher */
+
+#loc_type_sampling:after {
+	color: #996633;
+    content: " — — —";
+	font-weight: bold;
+}
+
+#loc_type_hydro:after {
+	color: #3399FF;
+    content: " — — —";
+	font-weight: bold;
+}
+
+#loc_type_sampling:after {
+	color: #336600;
+    content: " ———";
+	font-weight: bold;
+}
+
+#loc_type_equipment:after {
+	color: #999999;
+    content: " ———";
+	font-weight: bold;
+}
+
+#loc_type_eshape:after {
+	color: #cc0066;
+    content: " — — —";
+	font-weight: bold;
+}
+
+#loc_type_socioecological:after {
+	color: #cc3333;
+    content: " — — —";
+	font-weight: bold;
+}
+
+#loc_type_model:after {
+	color: #666699;
+    content: " — — —";
+	font-weight: bold;
+}
+
+#loc_type_airshed:after {
+	color: #6699cc;
+    content: " — — —";
+	font-weight: bold;
+}
+
+#loc_type_other:after {
+	color: #996633;
+    content: " — — —";
+	font-weight: bold;
+}
