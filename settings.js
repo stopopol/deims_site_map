@@ -24,6 +24,7 @@ wms_layer_name = geoserver_workspace + ":" + wms_layer_name;
 var cross_size = 4;
 var stroke_width = 2;
 var style_zindex = 1;
+var line_dash_value = [3, 5];
 
 //	colour styles
 var orange_fill = new ol.style.Fill({
@@ -62,6 +63,13 @@ var white_border_stroke = new ol.style.Stroke({
 	zIndex: style_zindex-1,
 });
 
+var white_border_stroke_dashed = new ol.style.Stroke({
+	color: '#FFFFFF',
+	width: stroke_width+1.5,
+	zIndex: style_zindex-1,
+	lineDash: line_dash_value
+});
+
 var grey_stroke = new ol.style.Stroke({
 	color: '#999999',
 	width: stroke_width
@@ -75,38 +83,38 @@ var green_stroke = new ol.style.Stroke({
 var pinkish_stroke = new ol.style.Stroke({
 	color: '#cc0066',
 	width: stroke_width,
-	lineDash: [3, 5]
+	lineDash: line_dash_value
 });
 
 var blueish_stroke = new ol.style.Stroke({
 	color: '#666699',
 	width: stroke_width,
-	lineDash: [3, 5]
+	lineDash: line_dash_value
 });
 
 var airshed_blue_stroke = new ol.style.Stroke({
 	color: '#6699cc',
 	width: stroke_width,
-	lineDash: [3, 5]
+	lineDash: line_dash_value
 });
 
 
 var redish_stroke = new ol.style.Stroke({
 	color: '#cc3333',
 	width: stroke_width,
-	lineDash: [3, 5]
+	lineDash: line_dash_value
 });
 
 var brown_stroke = new ol.style.Stroke({
 	color: '#996633',
 	width: stroke_width,
-	lineDash: [3, 5]
+	lineDash: line_dash_value
 });
 
 var blue_dashed_stroke = new ol.style.Stroke({
 	color: '#3399FF',
 	width: stroke_width,
-	lineDash: [3, 5] //or other combinations
+	lineDash: line_dash_value
 });
 
 var orange_point = new ol.style.Circle({
@@ -146,7 +154,7 @@ var boundaries_styles = [
 //	hydrological colour styles
 var hydro_styles = [
 	new ol.style.Style({
-		stroke: white_border_stroke
+		stroke: white_border_stroke_dashed
     }),
 	new ol.style.Style({
 		stroke: blue_dashed_stroke,
@@ -179,7 +187,7 @@ var equipment_location_styles = [
 //	eshape_location_layer					
 var eshape_location_styles = [
     new ol.style.Style({
-		stroke: white_border_stroke
+		stroke: white_border_stroke_dashed
     }),
 	new ol.style.Style({
 		stroke: pinkish_stroke,
@@ -189,7 +197,7 @@ var eshape_location_styles = [
 //	model_area_location_layer					
 var model_area_location_styles = [
     new ol.style.Style({
-		stroke: white_border_stroke
+		stroke: white_border_stroke_dashed
     }),
 	new ol.style.Style({
 		stroke: blueish_stroke,
@@ -199,7 +207,7 @@ var model_area_location_styles = [
 //	socio_ecological_location_layer					
 var socio_ecological_location_styles = [
     new ol.style.Style({
-		stroke: white_border_stroke
+		stroke: white_border_stroke_dashed
     }),
 	new ol.style.Style({
 		stroke: redish_stroke,
@@ -209,7 +217,7 @@ var socio_ecological_location_styles = [
 //	airshed_location_layer					
 var airshed_location_styles = [
     new ol.style.Style({
-		stroke: white_border_stroke
+		stroke: white_border_stroke_dashed
     }),
 	new ol.style.Style({
 		stroke: airshed_blue_stroke,
@@ -219,10 +227,10 @@ var airshed_location_styles = [
 //	other_location_layer					
 var other_location_styles = [
     new ol.style.Style({
-		stroke: white_border_stroke
+		stroke: white_border_stroke_dashed
     }),
 	new ol.style.Style({
 		stroke: brown_stroke,
 		image: brown_point
 	}),
-];
+]
