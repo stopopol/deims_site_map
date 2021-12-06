@@ -147,7 +147,7 @@ function parse_json(json_address) {
 				}
 
 			} 
-			
+		
 			// has EuroCordex model data
 			if (uuid in eurocordex_uuid_list) {
 				sidebar_object_dom.innerHTML += "<br><b>There is EURO-CORDEX climate scenario data available for this site:</b><br>";
@@ -218,8 +218,6 @@ function parse_json(json_address) {
 				
 			}
 			
-			sidebar_object_dom.innerHTML += "<br>";
-
 			var site_boundaries = jsonObj["attributes"]["geographic"]["boundaries"];
 			
 			// turn location layer switcher invisible
@@ -234,98 +232,107 @@ function parse_json(json_address) {
 			// add related locations
 			var related_locations = jsonObj["attributes"]["geographic"]["relatedLocations"];
 			if (related_locations) {
-
-				    var f = (function(){
+				
+				// related Locations
+				sidebar_object_dom.innerHTML += '<b>Related Locations:</b><br>';
+			
+			    var f = (function(){
 		
-						var xhr = [], i;
-						for (i = 0; i < related_locations.length; i++) { //for loop
-							(function(i){
-								xhr[i] = new XMLHttpRequest();
-								url = "https://deims.org/api/locations/" + related_locations[i]['id']['suffix'];
-								xhr[i].open("GET", url, true);
-								xhr[i].onreadystatechange = function(){
-									if (xhr[i].readyState === 4 && xhr[i].status === 200){
-										var location_json = JSON.parse(xhr[i].responseText);
-										var format = new ol.format.GeoJSON();
-											var feature = format.readFeature(location_json, {
-												dataProjection: 'EPSG:4326',
-												featureProjection: 'EPSG:3857'
-											});
-										if (location_json['properties']['locationType']) {
-											// add related locations
-											switch (location_json['properties']['locationType']['label']) {
-												case 'Hydrological Catchment':
-													hydrological_catchment_source.addFeature(feature);
-													$('#legend_locations_container').css("visibility", "visible");
-													$('#loc_type_hydro').css("visibility", "visible");
-													$('#loc_type_hydro').css("display", "block");
-													break;
-												case 'Sampling Area':
-													sampling_area_source.addFeature(feature);
-													$('#legend_locations_container').css("visibility", "visible");
-													$('#loc_type_sampling').css("visibility", "visible");
-													$('#loc_type_sampling').css("display", "block");
-													break;
-												case 'Equipment Location':
-													equipment_location_source.addFeature(feature);
-													$('#legend_locations_container').css("visibility", "visible");
-													$('#loc_type_equipment').css("visibility", "visible");
-													$('#loc_type_equipment').css("display", "block");
-													break;
-												case 'e-shape':
-													eshape_source.addFeature(feature);
-													$('#legend_locations_container').css("visibility", "visible");
-													$('#loc_type_eshape').css("visibility", "visible");
-													$('#loc_type_eshape').css("display", "block");
-													break;
-												case 'e-shape':
-													eshape_source.addFeature(feature);
-													$('#legend_locations_container').css("visibility", "visible");
-													$('#loc_type_eshape').css("visibility", "visible");
-													$('#loc_type_eshape').css("display", "block");
-													break;
-												case 'Air Shed':
-													airshed_source.addFeature(feature);
-													$('#legend_locations_container').css("visibility", "visible");
-													$('#loc_type_airshed').css("visibility", "visible");
-													$('#loc_type_airshed').css("display", "block");
-													break;
-												case 'Model Area':
-													model_area_source.addFeature(feature);
-													$('#legend_locations_container').css("visibility", "visible");
-													$('#loc_type_model').css("visibility", "visible");
-													$('#loc_type_model').css("display", "block");
-													break;	
-												case 'Socio-ecological reference area':
-													socio_ecological_source.addFeature(feature);
-													$('#legend_locations_container').css("visibility", "visible");
-													$('#loc_type_socioecological').css("visibility", "visible");
-													$('#loc_type_socioecological').css("display", "block");
-													break;
-												case 'not applicable':
-													other_locations_source.addFeature(feature);
-													$('#legend_locations_container').css("visibility", "visible");
-													$('#loc_type_other').css("visibility", "visible");
-													$('#loc_type_other').css("display", "block");
-													break;
-											}
-										}
-										else {
-											other_locations_source.addFeature(feature);
-											$('#legend_locations_container').css("visibility", "visible");
-											$('#loc_type_other').css("visibility", "visible");
-											$('#loc_type_other').css("display", "block");
-										}
-										
-									}
+					var xhr = [], i;
+					for (i = 0; i < related_locations.length; i++) { //for loop
+						(function(i){
+							xhr[i] = new XMLHttpRequest();
+							url = "https://deims.org/api/locations/" + related_locations[i]['id']['suffix'];
+							xhr[i].open("GET", url, true);
+							xhr[i].onreadystatechange = function(){
+								if (xhr[i].readyState === 4 && xhr[i].status === 200){
+									var location_json = JSON.parse(xhr[i].responseText);
+									var format = new ol.format.GeoJSON();
+									var feature = format.readFeature(location_json, {
+										id: location_json['properties']['id']['suffix'],
+										dataProjection: 'EPSG:4326',
+											featureProjection: 'EPSG:3857'
+									});
 									
-								};
+									sidebar_object_dom.innerHTML += '<a class="no_underline_link" href="' + location_json['properties']['id']['suffix'] + '" target="_blank">' + location_json['properties']['title'] + '</a>';
+									
+									if (location_json['properties']['locationType']) {
+										sidebar_object_dom.innerHTML += ' (' + location_json['properties']['locationType']['label'] + ')';
+										// add related locations
+										switch (location_json['properties']['locationType']['label']) {
+											case 'Hydrological Catchment':
+												hydrological_catchment_source.addFeature(feature);
+												$('#legend_locations_container').css("visibility", "visible");
+												$('#loc_type_hydro').css("visibility", "visible");
+												$('#loc_type_hydro').css("display", "block");
+												break;
+											case 'Sampling Area':
+												sampling_area_source.addFeature(feature);
+												$('#legend_locations_container').css("visibility", "visible");
+												$('#loc_type_sampling').css("visibility", "visible");
+												$('#loc_type_sampling').css("display", "block");
+												break;
+											case 'Equipment Location':
+												equipment_location_source.addFeature(feature);
+												$('#legend_locations_container').css("visibility", "visible");
+												$('#loc_type_equipment').css("visibility", "visible");
+												$('#loc_type_equipment').css("display", "block");
+												break;
+											case 'e-shape':
+												eshape_source.addFeature(feature);
+												$('#legend_locations_container').css("visibility", "visible");
+												$('#loc_type_eshape').css("visibility", "visible");
+												$('#loc_type_eshape').css("display", "block");
+												break;
+											case 'e-shape':
+												eshape_source.addFeature(feature);
+												$('#legend_locations_container').css("visibility", "visible");
+												$('#loc_type_eshape').css("visibility", "visible");
+												$('#loc_type_eshape').css("display", "block");
+												break;
+											case 'Air Shed':
+												airshed_source.addFeature(feature);
+												$('#legend_locations_container').css("visibility", "visible");
+												$('#loc_type_airshed').css("visibility", "visible");
+												$('#loc_type_airshed').css("display", "block");
+												break;
+											case 'Model Area':
+												model_area_source.addFeature(feature);
+												$('#legend_locations_container').css("visibility", "visible");
+												$('#loc_type_model').css("visibility", "visible");
+												$('#loc_type_model').css("display", "block");
+												break;	
+											case 'Socio-ecological reference area':
+												socio_ecological_source.addFeature(feature);
+												$('#legend_locations_container').css("visibility", "visible");
+												$('#loc_type_socioecological').css("visibility", "visible");
+												$('#loc_type_socioecological').css("display", "block");
+												break;
+											case 'not applicable':
+												other_locations_source.addFeature(feature);
+												$('#legend_locations_container').css("visibility", "visible");
+												$('#loc_type_other').css("visibility", "visible");
+												$('#loc_type_other').css("display", "block");
+												break;
+										}
+									}
+									else {
+										other_locations_source.addFeature(feature);
+										$('#legend_locations_container').css("visibility", "visible");
+										$('#loc_type_other').css("visibility", "visible");
+										$('#loc_type_other').css("display", "block");
+									}
+									sidebar_object_dom.innerHTML += '<br>';
+									
+								}
 								
-								xhr[i].send();
-							})(i);
-						}
-					})();
-
+							};
+							
+							xhr[i].send();
+						})(i);	
+					}
+				})();
+				
 			}
 			else {
 				$('#legend_locations_container').css("visibility", "hidden");
@@ -351,17 +358,16 @@ function parse_json(json_address) {
 					
 			view.fit(zoom_extent, {duration: 1000, padding: [50, 50, 50, 50]});
 			
-				
 		} 
 		
-		// if there is something wrong with the EF
+		// if there is something wrong with the JSON
 		if (x.readyState == 4 && x.status == 500) {
 			$.notify("The JSON record could not be loaded :(", {position:"top right"}, "error");		
 			return;
 		}
 		  
 	};
-		
+	
 	x.send(null);
 		
 	return true;       
