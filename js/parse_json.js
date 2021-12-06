@@ -210,9 +210,9 @@ function parse_json(json_address) {
 					table_string += '</tr>';
 
 				table_string += '</table><br>';
-				table_string += '<p>You can also <a class="no_underline_link" target="_blank" href="';
+				table_string += '<div>You can also <a class="no_underline_link" target="_blank" href="';
 				table_string += eurocordex_uuid_list[uuid];
-				table_string += '">download the entire climate scenario dataset for this site</a> from the EUDAT B2SHARE data store.</p>' ;
+				table_string += '">download the entire climate scenario dataset for this site</a> from the EUDAT B2SHARE data store.</div>' ;
 			
 				sidebar_object_dom.innerHTML += table_string;
 				
@@ -234,7 +234,7 @@ function parse_json(json_address) {
 			if (related_locations) {
 				
 				// related Locations
-				sidebar_object_dom.innerHTML += '<b>Related Locations:</b><br>';
+				sidebar_object_dom.innerHTML += '<br><b>Related Locations:</b><br>';
 			
 			    var f = (function(){
 		
