@@ -254,7 +254,7 @@ function parse_json(json_address) {
 											featureProjection: 'EPSG:3857'
 									});
 									
-									sidebar_object_dom.innerHTML += '<a class="no_underline_link" href="' + location_json['properties']['id']['suffix'] + '" target="_blank">' + location_json['properties']['title'] + '</a>';
+									sidebar_object_dom.innerHTML += '<a class="no_underline_link" href="' + location_json['properties']['id']['suffix'] + '" target="_blank">' + location_json['properties']['title'] + '<sup><i class="fa fa-external-link" aria-hidden="true"></i></sup></a>';
 									
 									if (location_json['properties']['locationType']) {
 										sidebar_object_dom.innerHTML += ' (' + location_json['properties']['locationType']['label'] + ')';
