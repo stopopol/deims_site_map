@@ -334,6 +334,7 @@ var model_area_source = new ol.source.Vector({});
 var socio_ecological_source = new ol.source.Vector({});
 var airshed_source = new ol.source.Vector({});
 var other_locations_source = new ol.source.Vector({});
+
 var point_layer = new ol.layer.Vector({
 	source: selected_site_source,
 	style: boundaries_styles,
