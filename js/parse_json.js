@@ -335,7 +335,7 @@ function parse_json(json_address) {
 										}
 									}
 									else {
-										other_locations_source.addFeature(feature);
+										other_locations_source.addFeature(feature2);
 										$('#legend_locations_container').css("visibility", "visible");
 										$('#loc_type_other').css("visibility", "visible");
 										$('#loc_type_other').css("display", "block");
