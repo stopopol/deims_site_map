@@ -268,14 +268,14 @@ var other_location_styles = [
 	}),
 ]
 
-var highlighting_locations_styles = [
+var invisible_locations_style = [
 	new ol.style.Style({
 		stroke: invisible_stroke,
 		image: invisible_point
 	}),
 ]
 
-var highlighting_locations_styles_2 = [
+var highlighting_locations_style = [
     new ol.style.Style({
 		stroke: white_border_stroke
     }),
