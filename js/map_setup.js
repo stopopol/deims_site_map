@@ -98,8 +98,6 @@ $('#detailed_information').on('mouseleave', "a.location_link", function () {
 	current_location_feature.setStyle(highlighting_locations_styles);
 });
 
-
-
 // Close modals on escape key press
 $(document).keyup(function (e) {
 	if (e.keyCode == 27) { // escape key maps to keycode `27`
