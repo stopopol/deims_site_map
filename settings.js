@@ -79,6 +79,11 @@ var grey_stroke = new ol.style.Stroke({
 	width: stroke_width
 });
 
+var red_stroke = new ol.style.Stroke({
+	color: '#999999',
+	width: stroke_width
+});
+
 var green_stroke = new ol.style.Stroke({
 	color: '#336600',
 	width: stroke_width
@@ -132,7 +137,7 @@ var blue_dashed_stroke = new ol.style.Stroke({
 	lineDash: line_dash_value
 });
 
-var invisble_point = new ol.style.Circle({
+var invisible_point = new ol.style.Circle({
 	fill: invisible_fill,
 	stroke: invisible_stroke,
 	radius: 0
@@ -143,6 +148,13 @@ var orange_point = new ol.style.Circle({
 	stroke: white_stroke,
 	radius: 5
 });
+
+var red_point = new ol.style.Circle({
+	fill: invisible_fill,
+	stroke: bright_red_stroke,
+	radius: 5
+});
+
 
 var green_point = new ol.style.Circle({
 	fill: green_fill,
@@ -257,21 +269,18 @@ var other_location_styles = [
 ]
 
 var highlighting_locations_styles = [
-    new ol.style.Style({
-		stroke: invisible_stroke
-    }),
 	new ol.style.Style({
 		stroke: invisible_stroke,
-		image: invisble_point
+		image: invisible_point
 	}),
 ]
 
 var highlighting_locations_styles_2 = [
     new ol.style.Style({
-		stroke: bright_red_stroke
+		stroke: white_border_stroke
     }),
 	new ol.style.Style({
-		stroke: invisible_stroke,
-		image: invisble_point
+		stroke: bright_red_stroke,
+		image: red_point
 	}),
 ]
