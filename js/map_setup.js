@@ -20,6 +20,9 @@ var other_location_check_var = false;
 var site_names = [];
 var site_names_appendix = [];
 
+var current_location_id = false;
+var current_location_feature = false;
+
 // fill up the menu with available layers and site names on geoserver	
 parse_geoserver_getcapabilities(geoserver_getcapabilities_url);
 var autocomplete_field = document.getElementById("sites_autocomplete");
@@ -86,15 +89,12 @@ $('#detailed_information').on('click', "a.obs_link", function () {
 
 // Listener for all hasObservation links in the site details
 $('#detailed_information').on('mouseenter', "a.location_link", function () {
-	var current_location_id = $(this).attr('id');
-	var current_location_feature = highlighting_locations_source.getFeatureById(current_location_id);
+	current_location_feature = highlighting_locations_source.getFeatureById($(this).attr('id'));
 	current_location_feature.setStyle(highlighting_locations_styles_2);
 });
 
 // Listener for all location links in the site details
 $('#detailed_information').on('mouseleave', "a.location_link", function () {
-	var current_location_id = $(this).attr('id');
-	var current_location_feature = highlighting_locations_source.getFeatureById(current_location_id);
 	current_location_feature.setStyle(highlighting_locations_styles);
 });
 
