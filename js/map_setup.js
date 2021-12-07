@@ -84,14 +84,14 @@ $('#detailed_information').on('click', "a.obs_link", function () {
 
 });
 
-// Listener for all hasObservation links
+// Listener for all hasObservation links in the site details
 $('#detailed_information').on('mouseenter', "a.location_link", function () {
 	var current_location_id = $(this).attr('id');
 	var current_location_feature = highlighting_locations_source.getFeatureById(current_location_id);
 	current_location_feature.setStyle(highlighting_locations_styles_2);
 });
 
-// Listener for all hasObservation links
+// Listener for all location links in the site details
 $('#detailed_information').on('mouseleave', "a.location_link", function () {
 	var current_location_id = $(this).attr('id');
 	var current_location_feature = highlighting_locations_source.getFeatureById(current_location_id);
