@@ -260,67 +260,74 @@ function parse_json(json_address) {
 									var location_json = JSON.parse(xhr[i].responseText);
 									var format = new ol.format.GeoJSON();
 									var feature = format.readFeature(location_json, {
-										id: location_json['properties']['id']['suffix'],
 										dataProjection: 'EPSG:4326',
-											featureProjection: 'EPSG:3857'
+										featureProjection: 'EPSG:3857'
+									});
+									feature.setId(location_json['properties']['id']['suffix']);
+									highlighting_locations_source.addFeature(feature);
+									
+									var feature2 = format.readFeature(location_json, {
+										dataProjection: 'EPSG:4326',
+										featureProjection: 'EPSG:3857'
 									});
 									
 									locations_container.innerHTML += '<a id = "' + location_json['properties']['id']['suffix'] + '" class="location_link no_underline_link" href="https://www.deims.org/locations/' + location_json['properties']['id']['suffix'] + '" target="_blank">' + location_json['properties']['title'] + '<sup><i class="fa fa-external-link" aria-hidden="true"></i></sup></a>';
 									
 									if (location_json['properties']['locationType']) {
 										locations_container.innerHTML += ' (' + location_json['properties']['locationType']['label'] + ')';
+										
 										// add related locations
 										switch (location_json['properties']['locationType']['label']) {
 											case 'Hydrological Catchment':
-												hydrological_catchment_source.addFeature(feature);
+												hydrological_catchment_source.addFeature(feature2);
 												$('#legend_locations_container').css("visibility", "visible");
 												$('#loc_type_hydro').css("visibility", "visible");
 												$('#loc_type_hydro').css("display", "block");
 												break;
 											case 'Sampling Area':
-												sampling_area_source.addFeature(feature);
+												sampling_area_source.addFeature(feature2);
 												$('#legend_locations_container').css("visibility", "visible");
 												$('#loc_type_sampling').css("visibility", "visible");
 												$('#loc_type_sampling').css("display", "block");
 												break;
 											case 'Equipment Location':
-												equipment_location_source.addFeature(feature);
+												equipment_location_source.addFeature(feature2);
 												$('#legend_locations_container').css("visibility", "visible");
 												$('#loc_type_equipment').css("visibility", "visible");
 												$('#loc_type_equipment').css("display", "block");
 												break;
 											case 'e-shape':
-												eshape_source.addFeature(feature);
+												eshape_source.addFeature(feature2);
 												$('#legend_locations_container').css("visibility", "visible");
 												$('#loc_type_eshape').css("visibility", "visible");
 												$('#loc_type_eshape').css("display", "block");
 												break;
 											case 'e-shape':
-												eshape_source.addFeature(feature);
+												eshape_source.addFeature(feature2);
 												$('#legend_locations_container').css("visibility", "visible");
 												$('#loc_type_eshape').css("visibility", "visible");
 												$('#loc_type_eshape').css("display", "block");
 												break;
 											case 'Air Shed':
-												airshed_source.addFeature(feature);
+												airshed_source.addFeature(feature2);
 												$('#legend_locations_container').css("visibility", "visible");
 												$('#loc_type_airshed').css("visibility", "visible");
 												$('#loc_type_airshed').css("display", "block");
 												break;
 											case 'Model Area':
-												model_area_source.addFeature(feature);
+												model_area_source.addFeature(feature2);
 												$('#legend_locations_container').css("visibility", "visible");
 												$('#loc_type_model').css("visibility", "visible");
 												$('#loc_type_model').css("display", "block");
 												break;	
 											case 'Socio-ecological reference area':
-												socio_ecological_source.addFeature(feature);
+												socio_ecological_source.addFeature(feature2);
 												$('#legend_locations_container').css("visibility", "visible");
 												$('#loc_type_socioecological').css("visibility", "visible");
 												$('#loc_type_socioecological').css("display", "block");
 												break;
 											case 'not applicable':
-												other_locations_source.addFeature(feature);
+												other_locations_source.addFeature(feature2);
 												$('#legend_locations_container').css("visibility", "visible");
 												$('#loc_type_other').css("visibility", "visible");
 												$('#loc_type_other').css("display", "block");
