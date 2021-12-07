@@ -90,12 +90,12 @@ $('#detailed_information').on('click', "a.obs_link", function () {
 // Listener for all hasObservation links in the site details
 $('#detailed_information').on('mouseenter', "a.location_link", function () {
 	current_location_feature = highlighting_locations_source.getFeatureById($(this).attr('id'));
-	current_location_feature.setStyle(highlighting_locations_styles_2);
+	current_location_feature.setStyle(highlighting_locations_style);
 });
 
 // Listener for all location links in the site details
 $('#detailed_information').on('mouseleave', "a.location_link", function () {
-	current_location_feature.setStyle(highlighting_locations_styles);
+	current_location_feature.setStyle(invisible_locations_style);
 });
 
 // Close modals on escape key press
@@ -352,7 +352,7 @@ var highlighting_locations_source = new ol.source.Vector({});
 
 var highlighting_locations_layer = new ol.layer.Vector({
 	source: highlighting_locations_source,
-	style: highlighting_locations_styles,
+	style: invisible_locations_style,
 	projection: 'EPSG:3857',
 	zIndex: '10'
 });
