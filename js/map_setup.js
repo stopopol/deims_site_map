@@ -87,13 +87,15 @@ $('#detailed_information').on('click', "a.obs_link", function () {
 // Listener for all hasObservation links
 $('#detailed_information').on('mouseenter', "a.location_link", function () {
 	var current_location_id = $(this).attr('id');
-	//console.log("it lives: " + current_location_id);
+	var current_location_feature = highlighting_locations_source.getFeatureById(current_location_id);
+	current_location_feature.setStyle(highlighting_locations_styles_2);
 });
 
 // Listener for all hasObservation links
 $('#detailed_information').on('mouseleave', "a.location_link", function () {
 	var current_location_id = $(this).attr('id');
-	//console.log("it dies: " + current_location_id);
+	var current_location_feature = highlighting_locations_source.getFeatureById(current_location_id);
+	current_location_feature.setStyle(highlighting_locations_styles);
 });
 
 
@@ -348,6 +350,14 @@ var model_area_source = new ol.source.Vector({});
 var socio_ecological_source = new ol.source.Vector({});
 var airshed_source = new ol.source.Vector({});
 var other_locations_source = new ol.source.Vector({});
+var highlighting_locations_source = new ol.source.Vector({});
+
+var highlighting_locations_layer = new ol.layer.Vector({
+	source: highlighting_locations_source,
+	style: highlighting_locations_styles,
+	projection: 'EPSG:3857',
+	zIndex: '10'
+});
 
 var point_layer = new ol.layer.Vector({
 	source: selected_site_source,
@@ -465,7 +475,8 @@ var osm = [
 	model_area_location_layer,
 	socio_ecological_location_layer,
 	airshed_location_layer,
-	other_location_layer
+	other_location_layer,
+	highlighting_locations_layer
 ];
 
 var view = new ol.View({
@@ -690,6 +701,7 @@ function clear_all_vector_sources() {
 	model_area_source.clear();
 	airshed_source.clear();
 	other_locations_source.clear();
+	highlighting_locations_source.clear();
 }
 
 function close_details() {
