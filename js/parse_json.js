@@ -147,6 +147,14 @@ function parse_json(json_address) {
 				}
 
 			} 
+			
+			
+			
+			var related_locations = jsonObj["attributes"]["geographic"]["relatedLocations"];
+			
+			if (related_locations) { 
+				sidebar_object_dom.innerHTML += '<div id ="locations_div"></div>';
+			}
 		
 			// has EuroCordex model data
 			if (uuid in eurocordex_uuid_list) {
@@ -230,11 +238,12 @@ function parse_json(json_address) {
 			}
 			
 			// add related locations
-			var related_locations = jsonObj["attributes"]["geographic"]["relatedLocations"];
+			
 			if (related_locations) {
 				
 				// related Locations
-				sidebar_object_dom.innerHTML += '<br><b>Related Locations:</b><br>';
+				var locations_container = document.getElementById("locations_div");
+				locations_container.innerHTML += '<br><b>Related Locations:</b><br>';
 			
 			    var f = (function(){
 		
@@ -254,10 +263,10 @@ function parse_json(json_address) {
 											featureProjection: 'EPSG:3857'
 									});
 									
-									sidebar_object_dom.innerHTML += '<a class="no_underline_link" href="' + location_json['properties']['id']['suffix'] + '" target="_blank">' + location_json['properties']['title'] + '<sup><i class="fa fa-external-link" aria-hidden="true"></i></sup></a>';
+									locations_container.innerHTML += '<a class="no_underline_link" href="' + location_json['properties']['id']['suffix'] + '" target="_blank">' + location_json['properties']['title'] + '<sup><i class="fa fa-external-link" aria-hidden="true"></i></sup></a>';
 									
 									if (location_json['properties']['locationType']) {
-										sidebar_object_dom.innerHTML += ' (' + location_json['properties']['locationType']['label'] + ')';
+										locations_container.innerHTML += ' (' + location_json['properties']['locationType']['label'] + ')';
 										// add related locations
 										switch (location_json['properties']['locationType']['label']) {
 											case 'Hydrological Catchment':
@@ -322,7 +331,7 @@ function parse_json(json_address) {
 										$('#loc_type_other').css("visibility", "visible");
 										$('#loc_type_other').css("display", "block");
 									}
-									sidebar_object_dom.innerHTML += '<br>';
+									locations_container.innerHTML += '<br>';
 									
 								}
 								
