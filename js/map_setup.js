@@ -84,6 +84,20 @@ $('#detailed_information').on('click', "a.obs_link", function () {
 
 });
 
+// Listener for all hasObservation links
+$('#detailed_information').on('mouseenter', "a.location_link", function () {
+	var current_location_id = $(this).attr('id');
+	//console.log("it lives: " + current_location_id);
+});
+
+// Listener for all hasObservation links
+$('#detailed_information').on('mouseleave', "a.location_link", function () {
+	var current_location_id = $(this).attr('id');
+	//console.log("it dies: " + current_location_id);
+});
+
+
+
 // Close modals on escape key press
 $(document).keyup(function (e) {
 	if (e.keyCode == 27) { // escape key maps to keycode `27`
