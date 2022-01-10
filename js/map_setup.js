@@ -481,9 +481,6 @@ var view = new ol.View({
 	projection: 'EPSG:3857',
 	center: map_centre,
 	zoom: initial_zoom_level,
-	//extent: null
-	showFullExtent: true
-   
 });
 
 /**
