@@ -59,7 +59,7 @@ Awesomplete.$('#sites_autocomplete').addEventListener("awesomplete-selectcomplet
 	var coords_3857 = ol.proj.transform([inter["lon"], inter["lat"]], 'EPSG:4326', 'EPSG:3857');
 
 	var viewResolution = /** @type {number} */ (view.getResolution());
-	var url = wmsSource.getGetFeatureInfoUrl(
+	var url = wmsSource.getFeatureInfoUrl (
 		coords_3857, viewResolution, 'EPSG:3857', {
 		'INFO_FORMAT': 'application/json'
 	});
@@ -278,9 +278,9 @@ $("#loc_type_other").change(function () {
 // Listener for BioRegions/BiogeographicalRegions_LAEA/MapServer/WMSServer layer		
 $("#biogeo_europe").change(function () {
 	if (bio_geo_check_var == false) {
+		// turn on legend
 		bgr.setVisible(true);
 		$('#legend_container').css("visibility", "visible");
-		// turn on legend
 		bio_geo_check_var = true;
 	} else {
 		// turn off legend
@@ -480,7 +480,10 @@ var osm = [
 var view = new ol.View({
 	projection: 'EPSG:3857',
 	center: map_centre,
-	zoom: initial_zoom_level
+	zoom: initial_zoom_level,
+	//extent: null
+	showFullExtent: true
+   
 });
 
 /**
@@ -517,7 +520,12 @@ app.ResetMapControl = function (opt_options) {
 	}); 
 
 };
-ol.inherits(app.ResetMapControl, ol.control.Control);
+
+var ol_ext_inherits = function(child,parent) {
+  child.prototype = Object.create(parent.prototype);
+  child.prototype.constructor = child;
+};
+ol_ext_inherits (app.ResetMapControl, ol.control.Control);
 
 var map = new ol.Map({
 	controls: ol.control.defaults({
@@ -578,12 +586,11 @@ function set_to_wms_extent(geoserver_getcapabilities_url) {
 			var extent = [minlon, minlat, maxlon, maxlat];
 			extent = ol.extent.applyTransform(extent, ol.proj.getTransform("EPSG:4326", "EPSG:3857"));
 
-
 			// zoom to extent
 			view.fit(extent, {
 				constrainResolution: false,
 				duration: 1000,
-				padding: [50, 50, 50, 50]
+				padding: [50, 50, 50, 50],
 			});
 			map.updateSize();
 
@@ -678,7 +685,7 @@ function parse_geoserver_getcapabilities(geoserver_getcapabilities_url) {
  */
 map.on('singleclick', function (evt) {
 	var viewResolution = /** @type {number} */ (view.getResolution());
-	var url = wmsSource.getGetFeatureInfoUrl(
+	var url = wmsSource.getFeatureInfoUrl (
 		evt.coordinate, viewResolution, 'EPSG:3857', {
 		'INFO_FORMAT': 'application/json'
 	});
