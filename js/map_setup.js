@@ -500,12 +500,12 @@ app.ResetMapControl = function (opt_options) {
 	var button = document.createElement('button');
 	button.innerHTML = 'R';
 
-	var handleRotateNorth = function () {
+	var handleReset = function () {
 		set_to_wms_extent(geoserver_getcapabilities_url);
 	};
 
-	button.addEventListener('click', handleRotateNorth, false);
-	button.addEventListener('touchstart', handleRotateNorth, false);
+	button.addEventListener('click', handleReset, false);
+	button.addEventListener('touchstart', handleReset, false);
 
 	var element = document.createElement('div');
 	element.className = 'reset-map-button ol-unselectable ol-control';
