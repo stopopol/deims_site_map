@@ -538,21 +538,47 @@ var map = new ol.Map({
 	view: view
 });
 
+function mark_centroid_coords_of_site(formatted_coordinates) {
+	overlay.setPosition(formatted_coordinates);
+
+	var selected_site = new ol.Feature({
+		geometry: new ol.geom.Point(formatted_coordinates),
+	});
+
+	clear_all_vector_sources();
+	selected_site_source.addFeature(selected_site);
+}
+
+
 // set first extent of map
 
 // for reading the deims.id from the url parameters
 if (window.location.search) {
 	var urlParams = new URLSearchParams(window.location.search);
 	if (urlParams.get('id')) {
-		// wait a bit for the footer id to render
-		setTimeout(function(){
-			show_site_details("https://deims.org/api/sites/" + urlParams.get('id'));
-		}, 500);
+		
+		var wms_url_for_coords = geoserver_base_url + geoserver_workspace + "/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=" + wms_layer_name + "&outputFormat=application%2Fjson&CQL_FILTER=deimsid=%27https://deims.org/" + urlParams.get('id') + "%27";
+		$.getJSON(wms_url_for_coords, function (data) {
+
+			var url_param_coords = ol.proj.transform([data["features"][0]["properties"]["field_coordinates_lon"], data["features"][0]["properties"]["field_coordinates_lat"]], 'EPSG:4326', 'EPSG:3857');
+			mark_centroid_coords_of_site(url_param_coords);
+			view.animate({
+				center: url_param_coords,
+				duration: 1000
+			});
+			// wait a bit for the footer id to render
+			setTimeout(function(){
+				show_site_details("https://deims.org/api/sites/" + urlParams.get('id'));
+			}, 500);
+		
+		});
+
 	}
 }
 else {
 	set_to_wms_extent(geoserver_getcapabilities_url);
 }
+
 
 
 function set_to_wms_extent(geoserver_getcapabilities_url) {
@@ -775,11 +801,10 @@ function show_site_details(json_address) {
 function render_info_box(url) {
 
 	$.getJSON(url, function (data) {
-		var features = data["features"];
 
-		if (features[0]) {
-			var properties = features[0];
-			var information_obj = properties["properties"];
+		if (data["features"][0]) {
+			
+			var information_obj = data["features"][0]["properties"];
 			var site_url = "<a href='" + information_obj["deimsid"] + "' class='no_underline_link' target='_blank'>View record on DEIMS-SDR<sup><i class='fa fa-external-link' aria-hidden='true'></i></sup></a>";
 			var json_address = 'https://deims.org/api/sites/' + information_obj["deimsid"].substr(18);
 
@@ -792,16 +817,7 @@ function render_info_box(url) {
 			content.innerHTML += '<br>' + '<a href=' + json_address + ' class="no_underline_link" style="white-space: nowrap;">Download site information [.json]</a>';
 			content.innerHTML += "<br><a id='something' href='javascript:;' class='no_underline_link'>Show more details ...</a>";
 
-			var current_coords = ol.proj.transform([information_obj["field_coordinates_lon"], information_obj["field_coordinates_lat"]], 'EPSG:4326', 'EPSG:3857');
-
-			overlay.setPosition(current_coords);
-
-			var selected_site = new ol.Feature({
-				geometry: new ol.geom.Point(current_coords),
-			});
-
-			clear_all_vector_sources();
-			selected_site_source.addFeature(selected_site);
+			mark_centroid_coords_of_site(ol.proj.transform([information_obj["field_coordinates_lon"], information_obj["field_coordinates_lat"]], 'EPSG:4326', 'EPSG:3857'));
 
 			$(document).keyup(function (e) {
 				if (e.keyCode == 27 && typeof overlay.getPosition() !== 'undefined' && typeof overlay.getPosition() !== 'undefined') { // escape key maps to keycode `27`
