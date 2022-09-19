@@ -130,7 +130,7 @@ function parse_json(json_address) {
 						var url = "https://deims.org/networks/" + jsonObj["attributes"]["affiliation"]["networks"][x]["network"]["id"]["suffix"];
 						sidebar_object_dom.innerHTML += '<a href="' + url + '" target="_blank" class="no_underline_link">' + title + '<sup><i class="fa fa-external-link" aria-hidden="true"></i></sup></a>';
 						if (jsonObj["attributes"]["affiliation"]["networks"][x]["verified"] == false) {
-							sidebar_object_dom.innerHTML += " (not verified)";
+							sidebar_object_dom.innerHTML += " (not verified by network on DEIMS-SDR)";
 						}
 						sidebar_object_dom.innerHTML += "<br>";
 
