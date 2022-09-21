@@ -749,22 +749,9 @@ function close_details() {
 }
 
 function location_layers_invisible () {
-	$('#loc_type_hydro').css("visibility", "hidden");
-	$('#loc_type_hydro').css("display", "none");
-	$('#loc_type_sampling').css("visibility", "hidden");
-	$('#loc_type_sampling').css("display", "none");
-	$('#loc_type_equipment').css("visibility", "hidden");
-	$('#loc_type_equipment').css("display", "none");
-	$('#loc_type_eshape').css("visibility", "hidden");
-	$('#loc_type_eshape').css("display", "none");
-	$('#loc_type_socioecological').css("visibility", "hidden");
-	$('#loc_type_socioecological').css("display", "none");
-	$('#loc_type_model').css("visibility", "hidden");
-	$('#loc_type_model').css("display", "none");
-	$('#loc_type_other').css("visibility", "hidden");
-	$('#loc_type_other').css("display", "none");	
-	$('#loc_type_airshed').css("visibility", "hidden");
-	$('#loc_type_airshed').css("display", "none");	
+	// find all elements starting with "loc_type_" and set them invisible
+	$('[id^="loc_type_"]').css("visibility","hidden");
+	$('[id^="loc_type_"]').css("display","none");
 }
 
 function show_site_details(json_address) {
