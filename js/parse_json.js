@@ -277,56 +277,50 @@ function parse_json(json_address) {
 										locations_container.innerHTML += ' (' + location_json['properties']['locationType']['label'] + ')';
 										
 										// add related locations
-										switch (location_json['properties']['locationType']['label']) {
-											case 'Hydrological Catchment':
+										switch (location_json['properties']['locationType']['uri']) {
+											case 'http://vocabs.lter-europe.net/elter_cl/10492':
 												hydrological_catchment_source.addFeature(feature2);
 												$('#legend_locations_container').css("visibility", "visible");
 												$('#loc_type_hydro').css("visibility", "visible");
 												$('#loc_type_hydro').css("display", "block");
 												break;
-											case 'Sampling Area':
+											case 'http://vocabs.lter-europe.net/elter_cl/10494':
 												sampling_area_source.addFeature(feature2);
 												$('#legend_locations_container').css("visibility", "visible");
 												$('#loc_type_sampling').css("visibility", "visible");
 												$('#loc_type_sampling').css("display", "block");
 												break;
-											case 'Equipment Location':
+											case 'http://vocabs.lter-europe.net/elter_cl/10491':
 												equipment_location_source.addFeature(feature2);
 												$('#legend_locations_container').css("visibility", "visible");
 												$('#loc_type_equipment').css("visibility", "visible");
 												$('#loc_type_equipment').css("display", "block");
 												break;
-											case 'e-shape':
+											case 'http://vocabs.lter-europe.net/elter_cl/10496':
 												eshape_source.addFeature(feature2);
 												$('#legend_locations_container').css("visibility", "visible");
 												$('#loc_type_eshape').css("visibility", "visible");
 												$('#loc_type_eshape').css("display", "block");
 												break;
-											case 'e-shape':
-												eshape_source.addFeature(feature2);
-												$('#legend_locations_container').css("visibility", "visible");
-												$('#loc_type_eshape').css("visibility", "visible");
-												$('#loc_type_eshape').css("display", "block");
-												break;
-											case 'Air Shed':
+											case 'http://vocabs.lter-europe.net/elter_cl/10490':
 												airshed_source.addFeature(feature2);
 												$('#legend_locations_container').css("visibility", "visible");
 												$('#loc_type_airshed').css("visibility", "visible");
 												$('#loc_type_airshed').css("display", "block");
 												break;
-											case 'Model Area':
+											case 'http://vocabs.lter-europe.net/elter_cl/10493':
 												model_area_source.addFeature(feature2);
 												$('#legend_locations_container').css("visibility", "visible");
 												$('#loc_type_model').css("visibility", "visible");
 												$('#loc_type_model').css("display", "block");
 												break;	
-											case 'Socio-ecological reference area':
+											case 'http://vocabs.lter-europe.net/elter_cl/10495':
 												socio_ecological_source.addFeature(feature2);
 												$('#legend_locations_container').css("visibility", "visible");
 												$('#loc_type_socioecological').css("visibility", "visible");
 												$('#loc_type_socioecological').css("display", "block");
 												break;
-											case 'not applicable':
+											case 'http://vocabs.lter-europe.net/elter_cl/10227':
 												other_locations_source.addFeature(feature2);
 												$('#legend_locations_container').css("visibility", "visible");
 												$('#loc_type_other').css("visibility", "visible");
