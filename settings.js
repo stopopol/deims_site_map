@@ -84,6 +84,11 @@ var red_stroke = new ol.style.Stroke({
 	width: stroke_width
 });
 
+var blue_stroke = new ol.style.Stroke({
+	color: '#666699',
+	width: stroke_width
+});
+
 var green_stroke = new ol.style.Stroke({
 	color: '#336600',
 	width: stroke_width
@@ -112,7 +117,6 @@ var invisible_stroke = new ol.style.Stroke({
 	width: 0,
 	lineDash: line_dash_value
 });
-
 
 var redish_stroke = new ol.style.Stroke({
 	color: '#cc3333',
@@ -155,6 +159,11 @@ var red_point = new ol.style.Circle({
 	radius: 5
 });
 
+var blue_point = new ol.style.Circle({
+	fill: blue_fill,
+	stroke: thin_white_stroke,
+	radius: 3
+});
 
 var green_point = new ol.style.Circle({
 	fill: green_fill,
@@ -190,6 +199,7 @@ var hydro_styles = [
 		stroke: white_border_stroke_dashed
     }),
 	new ol.style.Style({
+		image: blue_point,
 		stroke: blue_dashed_stroke,
 	})
 ];
