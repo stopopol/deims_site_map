@@ -166,6 +166,22 @@
 	text-align: center;
 }
 
+#legend_container_from_deims_geoserver {
+	background: #FFFFFF;
+	border-radius: 25px;
+    border: 1px solid #333;
+    padding-left: 20px; 
+    padding-right: 20px; 
+    padding-bottom: 20px; 
+    position: absolute;
+    bottom: 8px;
+    left: 8px;
+	font-size: 18px;
+	z-index: 6; /* Sit on top */
+	visibility: hidden;
+	text-align: center;
+}
+
 #legend_locations_container {
     position: absolute;
     top: 8px;
