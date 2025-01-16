@@ -164,7 +164,7 @@ $('#layers_selection').on('click', "li", function () {
 
 	fill_autocomplete(wms_layer_name, awesomplete);
 
-	if (wms_layer_name == 'deims:geri_sites') {
+	if (wms_layer_name == 'deims:geri') {
 		$('#legend_container_from_deims_geoserver').css("visibility", "visible");
 	}
 	else {
@@ -584,8 +584,18 @@ if (window.location.search) {
 	}
 	// load specific layer from start if specified explicitly
 	if (urlParams.get('layer')) {
+		
+		wms_layer_name = urlParams.get('layer');
+		
+		if (wms_layer_name == 'geri') {
+			$('#legend_container_from_deims_geoserver').css("visibility", "visible");
+		}
+		else {
+			$('#legend_container_from_deims_geoserver').css("visibility", "hidden");
+		}
+		
 		var params_obj = {
-			'LAYERS': 'deims:' + urlParams.get('layer')
+			'LAYERS': 'deims:' + wms_layer_name
 		};
 		wmsSource.updateParams(params_obj);
 		set_to_wms_extent(geoserver_getcapabilities_url);
