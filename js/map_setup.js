@@ -585,18 +585,21 @@ if (window.location.search) {
 	// load specific layer from start if specified explicitly
 	if (urlParams.get('layer')) {
 		
-		wms_layer_name = urlParams.get('layer');
+		url_layer_name = urlParams.get('layer');
 		
-		if (wms_layer_name == 'geri') {
+		if (url_layer_name == 'geri') {
 			$('#legend_container_from_deims_geoserver').css("visibility", "visible");
 		}
 		else {
 			$('#legend_container_from_deims_geoserver').css("visibility", "hidden");
 		}
 		
+		wms_layer_name = 'deims:' + url_layer_name
+
 		var params_obj = {
-			'LAYERS': 'deims:' + wms_layer_name
+			'LAYERS': wms_layer_name
 		};
+		
 		wmsSource.updateParams(params_obj);
 		set_to_wms_extent(geoserver_getcapabilities_url);
 	}
