@@ -159,9 +159,17 @@ $('#layers_selection').on('click', "li", function () {
 	var params_obj = {
 		'LAYERS': wms_layer_name
 	};
+	
 	wmsSource.refresh();
 
 	fill_autocomplete(wms_layer_name, awesomplete);
+
+	if (wms_layer_name == 'deims:geri_sites') {
+		$('#legend_container_from_deims_geoserver').css("visibility", "visible");
+	}
+	else {
+		$('#legend_container_from_deims_geoserver').css("visibility", "hidden");
+	}
 
 	document.getElementById('map').setAttribute("style", "width:100%");
 	document.getElementById('site_info').setAttribute("style", "width:0%", "height:0%");
@@ -215,7 +223,7 @@ $("#hydro_checkbox").change(function () {
 	}
 });
 
-// Listener for e-shape layer	
+// Listener for e-shape (remote sensing analysis) layer	
 $("#eshape_checkbox").change(function () {
 	if (eshape_check_var == false) {
 		eshape_layer.setVisible(true);
