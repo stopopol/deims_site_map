@@ -582,6 +582,14 @@ if (window.location.search) {
 		});
 
 	}
+	// load specific layer from start if specified explicitly
+	if (urlParams.get('layer')) {
+		var params_obj = {
+			'LAYERS': 'deims:' + urlParams.get('layer')
+		};
+		wmsSource.updateParams(params_obj);
+		set_to_wms_extent(geoserver_getcapabilities_url);
+	}
 }
 else {
 	set_to_wms_extent(geoserver_getcapabilities_url);
