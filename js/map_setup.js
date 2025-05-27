@@ -515,6 +515,14 @@ function createResetMapControl(options) {
   });
 }
 
+ scaleline_control = new ol.control.ScaleLine({
+    units: 'metric',
+    bar: false,
+    steps: 4,
+    text: true,
+    minWidth: 140
+ });
+
 
 // Create the map
 var map = new ol.Map({
@@ -523,13 +531,6 @@ var map = new ol.Map({
     new ol.control.Rotate(),
     new ol.control.Attribution({
       collapsible: false
-    }),
-    new ol.control.ScaleLine({
-      units: 'metric',
-      bar: false,
-      steps: 4,
-      text: true,
-      minWidth: 140
     }),
     createResetMapControl()
   ],
@@ -765,6 +766,7 @@ function close_details() {
 	clear_all_vector_sources();
 	$('#legend_locations_container').css("visibility", "hidden");
 	location_layers_invisible();
+	map.removeControl(scaleline_control);
 
 	$("#closer_button").remove();
 	site_info_var = false;
@@ -779,6 +781,7 @@ function location_layers_invisible () {
 
 function show_site_details(json_address) {
 	site_info_var = true;
+	map.addControl(scaleline_control);
 	
 	document.getElementById('map').setAttribute("style", "width:50%");
 	
