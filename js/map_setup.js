@@ -781,7 +781,6 @@ function location_layers_invisible () {
 
 function show_site_details(json_address) {
 	site_info_var = true;
-	map.addControl(scaleline_control);
 	
 	document.getElementById('map').setAttribute("style", "width:50%");
 	
