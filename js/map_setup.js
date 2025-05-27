@@ -491,60 +491,54 @@ var view = new ol.View({
 	zoom: initial_zoom_level,
 });
 
-/**
-  * Define a namespace for the application.
-  */
-window.app = {};
-var app = window.app;
+function createResetMapControl(options) {
+  options = options || {};
 
-/**
- * @constructor
- * @extends {ol.control.Control}
- * @param {Object=} opt_options Control options.
- */
-app.ResetMapControl = function (opt_options) {
+  const button = document.createElement('button');
+  button.innerHTML = 'R';
 
-	var options = opt_options || {};
-	var button = document.createElement('button');
-	button.innerHTML = 'R';
+  const handleReset = function () {
+    set_to_wms_extent(geoserver_getcapabilities_url);
+  };
 
-	var handleReset = function () {
-		set_to_wms_extent(geoserver_getcapabilities_url);
-	};
+  button.addEventListener('click', handleReset, false);
+  button.addEventListener('touchstart', handleReset, false);
 
-	button.addEventListener('click', handleReset, false);
-	button.addEventListener('touchstart', handleReset, false);
+  const element = document.createElement('div');
+  element.className = 'reset-map-button ol-unselectable ol-control';
+  element.appendChild(button);
 
-	var element = document.createElement('div');
-	element.className = 'reset-map-button ol-unselectable ol-control';
-	element.appendChild(button);
+  // Return a new instance of ol.control.Control (not subclassed)
+  return new ol.control.Control({
+    element: element,
+    target: options.target
+  });
+}
 
-	ol.control.Control.call(this, {
-		element: element,
-		target: options.target
-	}); 
 
-};
-
-var ol_ext_inherits = function(child,parent) {
-  child.prototype = Object.create(parent.prototype);
-  child.prototype.constructor = child;
-};
-ol_ext_inherits (app.ResetMapControl, ol.control.Control);
-
+// Create the map
 var map = new ol.Map({
-	controls: ol.control.defaults({
-		attributionOptions: {
-			collapsible: false
-		}
-	}).extend([
-		new app.ResetMapControl()
-	]),
-	layers: osm,
-	overlays: [overlay],
-	target: 'map',
-	view: view
+  controls: [
+    new ol.control.Zoom(),
+    new ol.control.Rotate(),
+    new ol.control.Attribution({
+      collapsible: false
+    }),
+    new ol.control.ScaleLine({
+      units: 'metric',
+      bar: false,
+      steps: 4,
+      text: true,
+      minWidth: 140
+    }),
+    createResetMapControl()
+  ],
+  layers: osm,
+  overlays: [overlay],
+  target: 'map',
+  view: view
 });
+
 
 function mark_centroid_coords_of_site(formatted_coordinates) {
 	overlay.setPosition(formatted_coordinates);
