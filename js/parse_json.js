@@ -238,9 +238,8 @@ function parse_json(json_address) {
 				$.notify("There is no boundary information available for this site :(", "info");
 				return;
 			}
-			else {
-				map.addControl(scaleline_control);
-			}
+			
+			map.addControl(scaleline_control);
 			
 			// add related locations
 			
