@@ -69,14 +69,17 @@ function parse_json(json_address) {
 				sidebar_object_dom.innerHTML += '<br><b>onlineResource(s):</b><br>';
 				for (x in jsonObj["attributes"]["contact"]["siteUrl"]) {
 					// check for content and skip the links to DEIMS as they are already listed below the title
-					if (jsonObj["attributes"]["contact"]["siteUrl"][x]["uri"] != "" && !_.includes(jsonObj["attributes"]["contact"]["siteUrl"][x]["uri"], "https://deims.org")) {
-						var online_resource_url = jsonObj["attributes"]["contact"]["siteUrl"][x]["value"];
-						var url_title = jsonObj["attributes"]["contact"]["siteUrl"][x]["title"];
-						if (url_title) {
-							sidebar_object_dom.innerHTML += "<a href=" + online_resource_url + " target='_blank' class='no_underline_link'>" + url_title + "<sup><i class='fa fa-external-link' aria-hidden='true'></i></sup></a><br>";
-						}
-						else {
-							sidebar_object_dom.innerHTML += "<a href=" + online_resource_url + " target='_blank' class='no_underline_link'>" + online_resource_url + "<sup><i class='fa fa-external-link' aria-hidden='true'></i></sup></a><br>";
+					var temp_string_check = jsonObj["attributes"]["contact"]["siteUrl"][x]["uri"];
+					if (temp_string_check && temp_string_check != "") {
+						if (!temp_string_check.includes("https://deims.org")) {
+							var online_resource_url = jsonObj["attributes"]["contact"]["siteUrl"][x]["value"];
+							var url_title = jsonObj["attributes"]["contact"]["siteUrl"][x]["title"];
+							if (url_title) {
+								sidebar_object_dom.innerHTML += "<a href=" + online_resource_url + " target='_blank' class='no_underline_link'>" + url_title + "<sup><i class='fa fa-external-link' aria-hidden='true'></i></sup></a><br>";
+							}
+							else {
+								sidebar_object_dom.innerHTML += "<a href=" + online_resource_url + " target='_blank' class='no_underline_link'>" + online_resource_url + "<sup><i class='fa fa-external-link' aria-hidden='true'></i></sup></a><br>";
+							}
 						}
 					}
 				}
