@@ -17,13 +17,9 @@
 	<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
 	<link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
 
-	<!-- The line below is only needed for old environments like Internet Explorer and Android 4.x -->
-	<script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
-
-
 	<!-- Mandatory libraries for this to work -->
 	<script src="js/ol.js"></script>
-	<!-- v6.11.0 for the map; https://openlayers.org/en/v4.6.5/examples/ -->
+	<!-- v10.5 for the map -->
 
 	<!-- includes the list of uuids for comparing to available EuroCordex Data -->
 	<script src="js/uuid_list.js"></script>
@@ -33,7 +29,7 @@
 	<!-- https://github.com/abdmob/x2js from 4 Jan 2016-->
 	<script src="js/xml2json.js"  type="text/javascript" defer="defer"></script>
 	<!-- needed for transforming the xml into json; for easier handling -->
-	<script src="js/notify.js"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 	<!-- v. from Oct 2016, used for status messages -->
 	<script src="js/parse_json.js"></script>
 	<!-- This is the code where the parsing of json files happens -->
@@ -43,14 +39,15 @@
 	
 	<!-- for the layout; mandatory -->
 	<link rel="stylesheet" href="css/ef_viewer.css">
-	<link rel="stylesheet" href="css/awesomplete.css" />
+	<link rel="stylesheet" href="css/toastify.css">
+	<link rel="stylesheet" href="css/awesomplete.css"/>
 	
 
 	<!-- for the layout; optional -->
 	<script type="text/javascript" src="bootstrap/js/bootstrap.bundle.min.js"></script>
 	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
 	<link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
-	<link href="https://fonts.googleapis.com/css?family=Open Sans" rel="stylesheet">
+	<link rel="stylesheet" href="css/opensans.css" >
 	<link rel="stylesheet" href="css/ol.css">
 
 </head>
