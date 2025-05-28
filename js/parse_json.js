@@ -150,7 +150,6 @@ function parse_json(json_address) {
 			} 
 			
 			
-			
 			var related_locations = jsonObj["attributes"]["geographic"]["relatedLocations"];
 			
 			if (related_locations) { 
@@ -236,7 +235,13 @@ function parse_json(json_address) {
 		
 			// if there is no boundary information available
 			if (!site_boundaries) {
-				$.notify("There is no boundary information available for this site :(", "info");
+				Toastify({
+					text: "There is no boundaries information available for this site :(",
+					duration: 3000, // in milliseconds
+					gravity: "top", // top or bottom
+					position: "right", // left, center, or right
+					backgroundColor: "#708090", // optional
+				}).showToast();
 				return;
 			}
 			
