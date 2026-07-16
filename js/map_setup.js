@@ -80,7 +80,6 @@ Awesomplete.$('#sites_autocomplete').addEventListener("awesomplete-selectcomplet
 $(document).keyup(function (e) {
 	if (e.keyCode == 27) { // escape key maps to keycode `27`
 		$("#myModal").modal('hide');
-		$("#observation_modal").modal('hide');
 	}
 });
 
