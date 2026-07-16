@@ -94,20 +94,6 @@ function parse_json(json_address) {
 				}
 				sidebar_object_dom.innerHTML += list_of_parameters.slice(0, -2) + "<br>";
 			}
-
-			// hasObservation
-			if (jsonObj["attributes"]["relatedResources"] != null) {
-				sidebar_object_dom.innerHTML += "<br><b>hasObservation(s):</b><br>";
-				
-				for (x in jsonObj["attributes"]["relatedResources"]) {
-					
-						var hasObservation_url = jsonObj["attributes"]["relatedResources"][x]["id"]["prefix"] + jsonObj["attributes"]["relatedResources"][x]["id"]["suffix"];	
-						var hasObservation_title = jsonObj["attributes"]["relatedResources"][x]["title"];			
-						sidebar_object_dom.innerHTML += "<a id="+ hasObservation_url +" href='#' class='obs_link no_underline_link' data-bs-toggle='modal' data-bs-target='#observation_modal'>" + hasObservation_title + "</a><br>";
-					
-				}
-	
-			}
 	
 			// responsibleParty
 			if (jsonObj["attributes"]["contact"]["siteManager"] != null) {
