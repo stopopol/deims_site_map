@@ -90,6 +90,16 @@ $(document).keyup(function (e) {
 	}
 });
 
+// Listener for all hasLocations links in the site details
+$('#detailed_information').on('mouseenter', "a.location_link", function () {
+	current_location_feature = highlighting_locations_source.getFeatureById($(this).attr('id'));
+	current_location_feature.setStyle(highlighting_locations_style);
+});
+
+$('#detailed_information').on('mouseleave', "a.location_link", function () {
+	current_location_feature.setStyle(invisible_locations_style);
+});
+
 // zoom in
 $(document).keyup(function (e) {
 	if (e.keyCode == 107 && !$('#sites_autocomplete').is(':focus')) {
