@@ -76,28 +76,6 @@ Awesomplete.$('#sites_autocomplete').addEventListener("awesomplete-selectcomplet
 
 });
 
-// Listener for all hasObservation links
-$('#detailed_information').on('click', "a.obs_link", function () {
-
-	var current_observation_title = $(this).text();
-	var current_observation = $(this).attr('id');
-	document.getElementById('observation_modal_title').innerHTML = "<h3>" + current_observation_title + "</h3>";
-	document.getElementById('observation_modal_content').innerHTML = "<h4>What do you want to do with the observation?</h4><br>";
-	document.getElementById('observation_modal_content').innerHTML += "<a href ='" + current_observation + "'class='no_underline_link' target='_blank'>" + "Go to the original record<sup><i class='fa fa-external-link' aria-hidden='true'></i></sup></a><br>";
-
-});
-
-// Listener for all hasObservation links in the site details
-$('#detailed_information').on('mouseenter', "a.location_link", function () {
-	current_location_feature = highlighting_locations_source.getFeatureById($(this).attr('id'));
-	current_location_feature.setStyle(highlighting_locations_style);
-});
-
-// Listener for all location links in the site details
-$('#detailed_information').on('mouseleave', "a.location_link", function () {
-	current_location_feature.setStyle(invisible_locations_style);
-});
-
 // Close modals on escape key press
 $(document).keyup(function (e) {
 	if (e.keyCode == 27) { // escape key maps to keycode `27`
