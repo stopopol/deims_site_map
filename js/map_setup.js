@@ -804,7 +804,7 @@ function render_info_box(url) {
 		if (data["features"][0]) {
 			
 			var information_obj = data["features"][0]["properties"];
-			var site_url = "<a href='" + information_obj["deimsid"] + "' class='no_underline_link' target='_blank'>View record on DEIMS-SDR<sup><i class='fa fa-external-link' aria-hidden='true'></i></sup></a>";
+			var site_url = "<a href='" + information_obj["deimsid"] + "' class='no_underline_link' target='_blank'>View record on DEIMS<sup><i class='fa fa-external-link' aria-hidden='true'></i></sup></a>";
 			var json_address = 'https://deims.org/api/sites/' + information_obj["deimsid"].substr(18);
 
 			content.innerHTML = "<h4>" + information_obj["name"] + "</h4>";
